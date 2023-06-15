@@ -14,6 +14,7 @@
 		930994032A3A001F00FDD3AB /* MementosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930994022A3A001F00FDD3AB /* MementosTests.swift */; };
 		9309940D2A3A001F00FDD3AB /* MementosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9309940C2A3A001F00FDD3AB /* MementosUITests.swift */; };
 		9309940F2A3A001F00FDD3AB /* MementosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9309940E2A3A001F00FDD3AB /* MementosUITestsLaunchTests.swift */; };
+		935B00092A3B620E0016829B /* TransferableImageWithMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935B00082A3B620E0016829B /* TransferableImageWithMetadata.swift */; };
 		935BFFF52A3B01C60016829B /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935BFFF42A3B01C60016829B /* WebView.swift */; };
 		935BFFF72A3B15A70016829B /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935BFFF62A3B15A70016829B /* Style.swift */; };
 		935BFFF92A3B59990016829B /* NewAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935BFFF82A3B59990016829B /* NewAlbumView.swift */; };
@@ -47,6 +48,7 @@
 		930994082A3A001F00FDD3AB /* MementosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MementosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9309940C2A3A001F00FDD3AB /* MementosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MementosUITests.swift; sourceTree = "<group>"; };
 		9309940E2A3A001F00FDD3AB /* MementosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MementosUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		935B00082A3B620E0016829B /* TransferableImageWithMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferableImageWithMetadata.swift; sourceTree = "<group>"; };
 		935BFFF42A3B01C60016829B /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		935BFFF62A3B15A70016829B /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		935BFFF82A3B59990016829B /* NewAlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAlbumView.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				930993F12A3A001E00FDD3AB /* MementosApp.swift */,
 				930993F32A3A001E00FDD3AB /* ContentView.swift */,
 				935BFFF82A3B59990016829B /* NewAlbumView.swift */,
+				935B00082A3B620E0016829B /* TransferableImageWithMetadata.swift */,
 				935BFFF62A3B15A70016829B /* Style.swift */,
 				935BFFF42A3B01C60016829B /* WebView.swift */,
 				930993F52A3A001F00FDD3AB /* Assets.xcassets */,
@@ -267,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				935BFFF52A3B01C60016829B /* WebView.swift in Sources */,
+				935B00092A3B620E0016829B /* TransferableImageWithMetadata.swift in Sources */,
 				930993F42A3A001E00FDD3AB /* ContentView.swift in Sources */,
 				935BFFF92A3B59990016829B /* NewAlbumView.swift in Sources */,
 				930993F22A3A001E00FDD3AB /* MementosApp.swift in Sources */,
