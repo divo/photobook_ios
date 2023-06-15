@@ -12,6 +12,7 @@ import PhotosUI
 struct NewAlbumView: View {
   @ObservedObject var viewModel = NewAlbumViewModel()
   @State var readWriteStatus = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+  let client = Client()
   
   var body: some View {
     VStack {
@@ -36,17 +37,22 @@ struct NewAlbumView: View {
       }
       
       // TODO: Test this logic makes sense and we can request again!
-      if readWriteStatus != .authorized && readWriteStatus != .limited {
-        Button("Allow photo access") {
-          PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
-            // https://developer.apple.com/documentation/photokit/delivering_an_enhanced_privacy_experience_in_your_photos_app
-            // TODO: Display status and remind user if it's limited
-            readWriteStatus = status
+      HStack {
+        if readWriteStatus != .authorized && readWriteStatus != .limited {
+          Button("Allow photo access") {
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+              // https://developer.apple.com/documentation/photokit/delivering_an_enhanced_privacy_experience_in_your_photos_app
+              // TODO: Display status and remind user if it's limited
+              readWriteStatus = status
+            }
+          }
+        } else {
+          PhotosPicker(selection: $viewModel.imageSelections, maxSelectionCount: 150, matching: .images, photoLibrary: .shared()) {
+            Text("Select Photos").padding(20)
           }
         }
-      } else {
-        PhotosPicker(selection: $viewModel.imageSelections, maxSelectionCount: 150, matching: .images, photoLibrary: .shared()) {
-          Text("Select Photos").padding(20)
+        Button("Test") {
+          client.test()
         }
       }
     }.navigationTitle("Create Album")

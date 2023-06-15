@@ -18,6 +18,8 @@
 		935B00162A3B648A0016829B /* ImageMetadataUtil in Frameworks */ = {isa = PBXBuildFile; productRef = 935B00152A3B648A0016829B /* ImageMetadataUtil */; };
 		935B00182A3B6F800016829B /* NewAlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935B00172A3B6F800016829B /* NewAlbumViewModel.swift */; };
 		935B001A2A3B6FEC0016829B /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935B00192A3B6FEC0016829B /* ImageModel.swift */; };
+		935B001D2A3B764B0016829B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 935B001C2A3B764B0016829B /* Alamofire */; };
+		935B001F2A3B76900016829B /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935B001E2A3B76900016829B /* Client.swift */; };
 		935BFFF52A3B01C60016829B /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935BFFF42A3B01C60016829B /* WebView.swift */; };
 		935BFFF72A3B15A70016829B /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935BFFF62A3B15A70016829B /* Style.swift */; };
 		935BFFF92A3B59990016829B /* NewAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935BFFF82A3B59990016829B /* NewAlbumView.swift */; };
@@ -54,6 +56,8 @@
 		935B00082A3B620E0016829B /* TransferableImageWithMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferableImageWithMetadata.swift; sourceTree = "<group>"; };
 		935B00172A3B6F800016829B /* NewAlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAlbumViewModel.swift; sourceTree = "<group>"; };
 		935B00192A3B6FEC0016829B /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
+		935B001E2A3B76900016829B /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		935B00202A3B786D0016829B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		935BFFF42A3B01C60016829B /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		935BFFF62A3B15A70016829B /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		935BFFF82A3B59990016829B /* NewAlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAlbumView.swift; sourceTree = "<group>"; };
@@ -65,6 +69,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				935B00162A3B648A0016829B /* ImageMetadataUtil in Frameworks */,
+				935B001D2A3B764B0016829B /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,7 +93,6 @@
 		930993E52A3A001E00FDD3AB = {
 			isa = PBXGroup;
 			children = (
-				935B00192A3B6FEC0016829B /* ImageModel.swift */,
 				930993F02A3A001E00FDD3AB /* Mementos */,
 				930994012A3A001F00FDD3AB /* MementosTests */,
 				9309940B2A3A001F00FDD3AB /* MementosUITests */,
@@ -109,6 +113,9 @@
 		930993F02A3A001E00FDD3AB /* Mementos */ = {
 			isa = PBXGroup;
 			children = (
+				935B00202A3B786D0016829B /* Info.plist */,
+				935B00192A3B6FEC0016829B /* ImageModel.swift */,
+				935B001E2A3B76900016829B /* Client.swift */,
 				930993F12A3A001E00FDD3AB /* MementosApp.swift */,
 				930993F32A3A001E00FDD3AB /* ContentView.swift */,
 				935BFFF82A3B59990016829B /* NewAlbumView.swift */,
@@ -165,6 +172,7 @@
 			name = Mementos;
 			packageProductDependencies = (
 				935B00152A3B648A0016829B /* ImageMetadataUtil */,
+				935B001C2A3B764B0016829B /* Alamofire */,
 			);
 			productName = Mementos;
 			productReference = 930993EE2A3A001E00FDD3AB /* Mementos.app */;
@@ -240,6 +248,7 @@
 			mainGroup = 930993E52A3A001E00FDD3AB;
 			packageReferences = (
 				935B00142A3B648A0016829B /* XCRemoteSwiftPackageReference "ImageMetadataUtil" */,
+				935B001B2A3B764B0016829B /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 930993EF2A3A001E00FDD3AB /* Products */;
 			projectDirPath = "";
@@ -291,6 +300,7 @@
 				930993F22A3A001E00FDD3AB /* MementosApp.swift in Sources */,
 				935BFFF72A3B15A70016829B /* Style.swift in Sources */,
 				935B001A2A3B6FEC0016829B /* ImageModel.swift in Sources */,
+				935B001F2A3B76900016829B /* Client.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +462,8 @@
 				DEVELOPMENT_TEAM = 9F7FZ3S533;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Mementos/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -481,6 +493,8 @@
 				DEVELOPMENT_TEAM = 9F7FZ3S533;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Mementos/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -625,6 +639,14 @@
 				minimumVersion = 0.1.0;
 			};
 		};
+		935B001B2A3B764B0016829B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -632,6 +654,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 935B00142A3B648A0016829B /* XCRemoteSwiftPackageReference "ImageMetadataUtil" */;
 			productName = ImageMetadataUtil;
+		};
+		935B001C2A3B764B0016829B /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 935B001B2A3B764B0016829B /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
