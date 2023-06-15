@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "imagemetadatautil",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/divo/ImageMetadataUtil.git",
+      "state" : {
+        "revision" : "6ac881913ca5c997a0e241b9de88a7a44a87373e",
+        "version" : "0.2.0"
+      }
+    }
+  ],
+  "version" : 2
+}

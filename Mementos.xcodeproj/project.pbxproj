@@ -15,6 +15,9 @@
 		9309940D2A3A001F00FDD3AB /* MementosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9309940C2A3A001F00FDD3AB /* MementosUITests.swift */; };
 		9309940F2A3A001F00FDD3AB /* MementosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9309940E2A3A001F00FDD3AB /* MementosUITestsLaunchTests.swift */; };
 		935B00092A3B620E0016829B /* TransferableImageWithMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935B00082A3B620E0016829B /* TransferableImageWithMetadata.swift */; };
+		935B00162A3B648A0016829B /* ImageMetadataUtil in Frameworks */ = {isa = PBXBuildFile; productRef = 935B00152A3B648A0016829B /* ImageMetadataUtil */; };
+		935B00182A3B6F800016829B /* NewAlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935B00172A3B6F800016829B /* NewAlbumViewModel.swift */; };
+		935B001A2A3B6FEC0016829B /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935B00192A3B6FEC0016829B /* ImageModel.swift */; };
 		935BFFF52A3B01C60016829B /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935BFFF42A3B01C60016829B /* WebView.swift */; };
 		935BFFF72A3B15A70016829B /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935BFFF62A3B15A70016829B /* Style.swift */; };
 		935BFFF92A3B59990016829B /* NewAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935BFFF82A3B59990016829B /* NewAlbumView.swift */; };
@@ -49,6 +52,8 @@
 		9309940C2A3A001F00FDD3AB /* MementosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MementosUITests.swift; sourceTree = "<group>"; };
 		9309940E2A3A001F00FDD3AB /* MementosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MementosUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		935B00082A3B620E0016829B /* TransferableImageWithMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferableImageWithMetadata.swift; sourceTree = "<group>"; };
+		935B00172A3B6F800016829B /* NewAlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAlbumViewModel.swift; sourceTree = "<group>"; };
+		935B00192A3B6FEC0016829B /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		935BFFF42A3B01C60016829B /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		935BFFF62A3B15A70016829B /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		935BFFF82A3B59990016829B /* NewAlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAlbumView.swift; sourceTree = "<group>"; };
@@ -59,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				935B00162A3B648A0016829B /* ImageMetadataUtil in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +88,7 @@
 		930993E52A3A001E00FDD3AB = {
 			isa = PBXGroup;
 			children = (
+				935B00192A3B6FEC0016829B /* ImageModel.swift */,
 				930993F02A3A001E00FDD3AB /* Mementos */,
 				930994012A3A001F00FDD3AB /* MementosTests */,
 				9309940B2A3A001F00FDD3AB /* MementosUITests */,
@@ -105,6 +112,7 @@
 				930993F12A3A001E00FDD3AB /* MementosApp.swift */,
 				930993F32A3A001E00FDD3AB /* ContentView.swift */,
 				935BFFF82A3B59990016829B /* NewAlbumView.swift */,
+				935B00172A3B6F800016829B /* NewAlbumViewModel.swift */,
 				935B00082A3B620E0016829B /* TransferableImageWithMetadata.swift */,
 				935BFFF62A3B15A70016829B /* Style.swift */,
 				935BFFF42A3B01C60016829B /* WebView.swift */,
@@ -155,6 +163,9 @@
 			dependencies = (
 			);
 			name = Mementos;
+			packageProductDependencies = (
+				935B00152A3B648A0016829B /* ImageMetadataUtil */,
+			);
 			productName = Mementos;
 			productReference = 930993EE2A3A001E00FDD3AB /* Mementos.app */;
 			productType = "com.apple.product-type.application";
@@ -227,6 +238,9 @@
 				Base,
 			);
 			mainGroup = 930993E52A3A001E00FDD3AB;
+			packageReferences = (
+				935B00142A3B648A0016829B /* XCRemoteSwiftPackageReference "ImageMetadataUtil" */,
+			);
 			productRefGroup = 930993EF2A3A001E00FDD3AB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -270,11 +284,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				935BFFF52A3B01C60016829B /* WebView.swift in Sources */,
+				935B00182A3B6F800016829B /* NewAlbumViewModel.swift in Sources */,
 				935B00092A3B620E0016829B /* TransferableImageWithMetadata.swift in Sources */,
 				930993F42A3A001E00FDD3AB /* ContentView.swift in Sources */,
 				935BFFF92A3B59990016829B /* NewAlbumView.swift in Sources */,
 				930993F22A3A001E00FDD3AB /* MementosApp.swift in Sources */,
 				935BFFF72A3B15A70016829B /* Style.swift in Sources */,
+				935B001A2A3B6FEC0016829B /* ImageModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,6 +615,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		935B00142A3B648A0016829B /* XCRemoteSwiftPackageReference "ImageMetadataUtil" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/divo/ImageMetadataUtil.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		935B00152A3B648A0016829B /* ImageMetadataUtil */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 935B00142A3B648A0016829B /* XCRemoteSwiftPackageReference "ImageMetadataUtil" */;
+			productName = ImageMetadataUtil;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 930993E62A3A001E00FDD3AB /* Project object */;
 }
