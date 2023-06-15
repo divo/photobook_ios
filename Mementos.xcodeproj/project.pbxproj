@@ -16,6 +16,7 @@
 		9309940F2A3A001F00FDD3AB /* MementosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9309940E2A3A001F00FDD3AB /* MementosUITestsLaunchTests.swift */; };
 		935BFFF52A3B01C60016829B /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935BFFF42A3B01C60016829B /* WebView.swift */; };
 		935BFFF72A3B15A70016829B /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935BFFF62A3B15A70016829B /* Style.swift */; };
+		935BFFF92A3B59990016829B /* NewAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935BFFF82A3B59990016829B /* NewAlbumView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		9309940E2A3A001F00FDD3AB /* MementosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MementosUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		935BFFF42A3B01C60016829B /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		935BFFF62A3B15A70016829B /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		935BFFF82A3B59990016829B /* NewAlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAlbumView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			children = (
 				930993F12A3A001E00FDD3AB /* MementosApp.swift */,
 				930993F32A3A001E00FDD3AB /* ContentView.swift */,
+				935BFFF82A3B59990016829B /* NewAlbumView.swift */,
 				935BFFF62A3B15A70016829B /* Style.swift */,
 				935BFFF42A3B01C60016829B /* WebView.swift */,
 				930993F52A3A001F00FDD3AB /* Assets.xcassets */,
@@ -265,6 +268,7 @@
 			files = (
 				935BFFF52A3B01C60016829B /* WebView.swift in Sources */,
 				930993F42A3A001E00FDD3AB /* ContentView.swift in Sources */,
+				935BFFF92A3B59990016829B /* NewAlbumView.swift in Sources */,
 				930993F22A3A001E00FDD3AB /* MementosApp.swift in Sources */,
 				935BFFF72A3B15A70016829B /* Style.swift in Sources */,
 			);

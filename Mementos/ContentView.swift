@@ -9,23 +9,24 @@ import SwiftUI
 
 struct ContentView: View {
 #if DEBUG
-  let webView = WebView(url: URL(string: "http://192.168.0.87:3000/photo_albums")!)
+  var webView = WebView(url: URL(string: "http://192.168.0.87:3000/photo_albums")!)
 #else
-  let webView = WebView(url: URL(string: "https://mementos.com/photo_albums")!)
+  var webView = WebView(url: URL(string: "https://mementos.com/photo_albums")!)
 #endif
   
   var body: some View {
     NavigationView {
       VStack {
         webView
-        Button("Create Album") {
-          print("press")
-        }.padding(20.0)
-          .frame(width: 300.0)
-          .foregroundColor(/*@START_MENU_TOKEN@*/.white/*@END_MENU_TOKEN@*/)
-          .background(Style.secondaryColor())
-          .cornerRadius(/*@START_MENU_TOKEN@*/6.0/*@END_MENU_TOKEN@*/)
-      }.navigationTitle("Mementos")
+        NavigationLink(destination: NewAlbumView()) {
+          Text("Create Album")
+            .padding(20.0)
+           .frame(width: 300.0)
+           .foregroundColor(/*@START_MENU_TOKEN@*/.white/*@END_MENU_TOKEN@*/)
+           .background(Style.secondaryColor())
+           .cornerRadius(/*@START_MENU_TOKEN@*/6.0/*@END_MENU_TOKEN@*/)
+        }.navigationTitle("Mementos")
+      }
     }
   }
 }
