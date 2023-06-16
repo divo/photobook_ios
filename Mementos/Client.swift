@@ -13,11 +13,21 @@ struct DecodableType: Decodable { let url: String }
 
 //TODO: Allow arbitrary loads is set for testing, delete it before release
 class Client {
+ 
+  // TODO: Passing the webView so I can grab the cookie, which will come some time after setup
+  // so I need the webView to grab the cookie in the future.
+  // I have to pass the WebView all the way to the Client because I need to futz around with reference
+  // If there is no cookie I need to present the login form and then load the rest of the view.
+  // or something
+//  init(webView: WebView) {
+//    self.webView = webView
+//  }
+  
   public func test() {
     let url = "http://192.168.0.88:3000/photo_albums"
-    let headers: HTTPHeaders = [
-      "Content-Type": "application/json"
-    ]
+    let cookies = AF.session.configuration.httpCookieStorage!.cookies!
+    let header_cookie = HTTPCookie.requestHeaderFields(with: cookies)
+    var headers = HTTPHeaders(header_cookie)
     
     AF.request(url, headers: headers).responseString { response in
       print(response.value)

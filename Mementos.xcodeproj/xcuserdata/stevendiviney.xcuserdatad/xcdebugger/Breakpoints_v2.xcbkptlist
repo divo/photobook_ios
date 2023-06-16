@@ -3,4 +3,69 @@
    uuid = "A98BD38D-7556-4313-8B84-A4FBE9EDC95A"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2AFC51AB-2068-4CB1-BE70-558705A65655"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mementos/Client.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "test()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2AFC51AB-2068-4CB1-BE70-558705A65655 - 3acd7839b31be360"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Mementos.Client.test() -&gt; ()"
+                  moduleName = "Mementos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stevendiviney/code/photobook_ios/Mementos/Client.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "112">
+               </Location>
+               <Location
+                  uuid = "2AFC51AB-2068-4CB1-BE70-558705A65655 - 3acd7839b31be360"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Mementos.Client.test() -&gt; ()"
+                  moduleName = "Mementos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stevendiviney/code/photobook_ios/Mementos/Client.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "140">
+               </Location>
+               <Location
+                  uuid = "2AFC51AB-2068-4CB1-BE70-558705A65655 - 3acd7839b31be360"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Mementos.Client.test() -&gt; ()"
+                  moduleName = "Mementos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stevendiviney/code/photobook_ios/Mementos/Client.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "208">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
