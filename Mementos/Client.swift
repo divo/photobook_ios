@@ -52,25 +52,17 @@ class Client {
     AF.request("http://192.168.0.88:3000/photo_albums/new", method: .get, headers: headers).responseString { response in
       switch response.result {
       case.success(let body):
-        if let headerFields = response.response?.allHeaderFields as? [String: String],
-           let URL = response.request?.url
-        {
-          let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: URL)
-          let csrfToken = self.extractCSRFToken(from: body)!
-          var fresh_headers = HTTPHeaders(HTTPCookie.requestHeaderFields(with: cookies))
-//          var fresh_headers = HTTPHeaders(headerFields)
-          fresh_headers.add(name: "authenticity_token", value: csrfToken)
-          AF.request(url, method: .post, parameters: params, headers: fresh_headers).responseString { response in
-            print(response)
-          }
+        let csrfToken = self.extractCSRFToken(from: body)!
+        headers.add(name: "X-CSRF-Token", value: csrfToken)
+        AF.request(url, method: .post, parameters: params, headers: headers).responseString { response in
+          print(response)
         }
-        
-     case .failure(let error):
+      case .failure(let error):
         // TODO: Something
         print(error.localizedDescription)
       }
     }
- }
+  }
   
   // Code grabbed from ChatGPT, a bit out of date but this is all hacky anyway
   func extractCSRFToken(from string: String) -> String? {
