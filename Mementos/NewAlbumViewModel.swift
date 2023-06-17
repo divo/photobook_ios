@@ -11,7 +11,7 @@ import PhotosUI
 
 class NewAlbumViewModel: ObservableObject {
   var title: String = ""
-  @Published var images: [ImageModel] = []
+  @Published var images: [ImageModel] = [] // Upload images as they are appended here
   @Published var imageSelections: [PhotosPickerItem] = [] {
     didSet {
       for item in imageSelections {
@@ -29,6 +29,7 @@ class NewAlbumViewModel: ObservableObject {
                                          uiImage: trans_image.image,
                                          metadata: trans_image.metadata)
           if !self.images.contains(hashableImage) {
+            // TODO: Also need to remove images no longer picked
             self.images.append(hashableImage)
           }
         case .success(nil):

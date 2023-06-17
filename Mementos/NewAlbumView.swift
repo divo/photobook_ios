@@ -52,7 +52,13 @@ struct NewAlbumView: View {
           }
         }
         Button("Test") {
-          client.test()
+//          client.create_album(title: "Test")
+          if let data = viewModel.images.first?.jpegData() {
+            client.direct_upload(imageModel: viewModel.images.first!) { result in
+              print(result)
+            }
+            //            client.upload_image(data: data)
+          }
         }
       }
     }.navigationTitle("Create Album")
