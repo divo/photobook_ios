@@ -62,5 +62,12 @@ struct NewAlbumView: View {
         }
       }
     }.navigationTitle("Create Album")
+    }.navigationTitle("Create Album").onAppear(perform: onAppear)
+  }
+  
+  func onAppear() {
+    client.request_csrf { csrfToken in
+      self.viewModel.csrfToken = csrfToken
+    }
   }
 }
