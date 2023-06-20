@@ -52,22 +52,39 @@ struct NewAlbumView: View {
           }
         }
         Button("Test") {
-//          client.create_album(title: "Test")
-          if let data = viewModel.images.first?.jpegData() {
-            client.direct_upload(imageModel: viewModel.images.first!) { result in
-              print(result)
-            }
-            //            client.upload_image(data: data)
+          self.client.direct_upload(csrf: self.viewModel.csrfToken!, imageModel: self.viewModel.images.first!) { response in
+            print(response)
           }
+          print("Test")
         }
       }
-    }.navigationTitle("Create Album")
     }.navigationTitle("Create Album").onAppear(perform: onAppear)
   }
   
   func onAppear() {
+    self.viewModel.imageAddedCallback = { imageModel in
+      self.upload(image: imageModel)
+    }
+    
     client.request_csrf { csrfToken in
       self.viewModel.csrfToken = csrfToken
+    }
+  }
+
+  func upload(image: ImageModel) {
+    switch image.state {
+    case .waiting:
+      image.state = .uploading
+      client.direct_upload(csrf: viewModel.csrfToken!, imageModel: image) { response in
+        switch response {
+        case .success(let signed_id):
+          image.state = .uploaded(signed_id)
+        case .failure(_):
+          image.state = .failed
+        }
+      }
+    default:
+      break
     }
   }
 }

@@ -12,11 +12,19 @@ import ImageMetadataUtil
 import UniformTypeIdentifiers
 import CryptoKit
 
-struct ImageModel: Hashable, Equatable {
+enum ImageState {
+  case waiting
+  case uploading
+  case uploaded(String)
+  case failed
+}
+
+class ImageModel: Hashable, Equatable {
   let id: String
   let uiImage: UIImage
   let metadata: [String : Any]?
   let image: Image
+  var state: ImageState = .waiting
   
   init(id: String?, uiImage: UIImage, metadata: [String : Any]?) {
     self.id = id ?? UUID().uuidString
@@ -35,10 +43,15 @@ struct ImageModel: Hashable, Equatable {
 }
 
 extension ImageModel {
-  func jpegData() -> Data? {
+  enum ImageSerializationError: Error {
+    case EncodingFailed
+  }
+  
+  func jpegData() throws -> Data {
     guard let data = uiImage.jpegData(compressionQuality: 0.9) else {
+      //TODO: I should upload it as is and let Rails have a go
       print("Unable able to encode JPEG data")
-      return nil
+      throw ImageSerializationError.EncodingFailed
     }
     
     guard let metadata = self.metadata else {
@@ -50,19 +63,9 @@ extension ImageModel {
 }
 
 extension ImageModel {
-  // {"blob":{"filename":"IMG_4068.dng","content_type":"image/x-adobe-dng","byte_size":2338814,"checksum":"uQLgGAHcP6zKTECHb0W+jw=="}}
-  enum ImageSerializationError: Error {
-    case EncodingFailed
-  }
-
   // Converting everything to JPEG on device. I think this is ok do, cuts down on upload size
-  func to_json() throws -> [String : [String: String]] {
-    guard let data = jpegData() else { // FIXME: Encoding here and again on upload is wasteful
-      // I should upload it as is and let Rails have a go
-      throw ImageSerializationError.EncodingFailed
-    }
-
-    let checksum = Insecure.MD5.hash(data: data)
+  func to_json(data: Data) -> [String : [String: String]] {
+      let checksum = Insecure.MD5.hash(data: data)
     
     return ["blob": [
       "filename" : self.id,
