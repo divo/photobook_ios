@@ -14,18 +14,21 @@ struct ContentView: View {
   var webView = WebView(url: URL(string: "https://mementos.com/photo_albums")!)
 #endif
   
+  @State var isActive: Bool = false
+  
   var body: some View {
     NavigationView {
       VStack {
         webView
-        NavigationLink(destination: NewAlbumView()) {
-          Text("Create Album")
+        NavigationLink(destination: NewAlbumView(rootIsActive: self.$isActive), isActive: self.$isActive) {
+          Text("New Album")
             .padding(20.0)
            .frame(width: 300.0)
            .foregroundColor(/*@START_MENU_TOKEN@*/.white/*@END_MENU_TOKEN@*/)
            .background(Style.secondaryColor())
            .cornerRadius(/*@START_MENU_TOKEN@*/6.0/*@END_MENU_TOKEN@*/)
-        }.navigationTitle("Mementos")
+        }.isDetailLink(false)
+        .navigationTitle("Mementos")
       }
     }
   }

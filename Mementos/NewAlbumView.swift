@@ -13,7 +13,9 @@ import PhotosUI
 struct NewAlbumView: View {
   @ObservedObject var viewModel = NewAlbumViewModel()
   @State var readWriteStatus = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+  @State var pushShow = false
   let client = Client()
+  @Binding var rootIsActive: Bool
   
   var body: some View {
     VStack {
@@ -52,9 +54,26 @@ struct NewAlbumView: View {
             Text("Select Photos").padding(20)
           }
         }
+        
         Button("Create Album") {
-          self.client.create_album(csrf: self.viewModel.csrfToken!, title: self.viewModel.title, images: self.viewModel.images)
+          self.client.create_album(csrf: self.viewModel.csrfToken!, title: self.viewModel.title, images: self.viewModel.images) { result in
+            switch result {
+            case .success(let album):
+              print("Album created: " + album.id)
+              self.pushShow = true
+            case .failure(let error):
+              print(error)
+            }
+          }
         }
+      }
+      
+      NavigationLink(destination: ShowAlbumView(shouldPopToRootView: self.$rootIsActive), isActive: self.$pushShow) { EmptyView() }
+      //      NavigationLink(destination: ShowAlbumView(albumId: "1", shouldPopToRoorView: self.$rootIsActive), isActive: self.$pushShow) { EmptyView() }
+        .isDetailLink(false)
+        .navigationTitle("Title")
+      Button("Test") {
+        self.pushShow = true
       }
     }.navigationTitle("Create Album").onAppear(perform: onAppear)
   }
