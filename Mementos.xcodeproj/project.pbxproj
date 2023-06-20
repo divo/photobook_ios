@@ -23,6 +23,7 @@
 		935BFFF52A3B01C60016829B /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935BFFF42A3B01C60016829B /* WebView.swift */; };
 		935BFFF72A3B15A70016829B /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935BFFF62A3B15A70016829B /* Style.swift */; };
 		935BFFF92A3B59990016829B /* NewAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935BFFF82A3B59990016829B /* NewAlbumView.swift */; };
+		939239742A41F58700CD0DF4 /* ShowAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939239732A41F58700CD0DF4 /* ShowAlbumView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		935BFFF42A3B01C60016829B /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		935BFFF62A3B15A70016829B /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		935BFFF82A3B59990016829B /* NewAlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAlbumView.swift; sourceTree = "<group>"; };
+		939239732A41F58700CD0DF4 /* ShowAlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlbumView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				935B001E2A3B76900016829B /* Client.swift */,
 				930993F12A3A001E00FDD3AB /* MementosApp.swift */,
 				930993F32A3A001E00FDD3AB /* ContentView.swift */,
+				939239732A41F58700CD0DF4 /* ShowAlbumView.swift */,
 				935BFFF82A3B59990016829B /* NewAlbumView.swift */,
 				935B00172A3B6F800016829B /* NewAlbumViewModel.swift */,
 				935B00082A3B620E0016829B /* TransferableImageWithMetadata.swift */,
@@ -293,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				935BFFF52A3B01C60016829B /* WebView.swift in Sources */,
+				939239742A41F58700CD0DF4 /* ShowAlbumView.swift in Sources */,
 				935B00182A3B6F800016829B /* NewAlbumViewModel.swift in Sources */,
 				935B00092A3B620E0016829B /* TransferableImageWithMetadata.swift in Sources */,
 				930993F42A3A001E00FDD3AB /* ContentView.swift in Sources */,

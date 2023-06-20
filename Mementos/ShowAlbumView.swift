@@ -15,22 +15,19 @@ struct ShowAlbumView: View {
   let baseUrl = "https://mementos.com"
 #endif
   
-//  let albumId: String
-  let webView = WebView(url: URL(string: "http://192.168.0.87:3000" + "/photo_albums/" + "1")!)
+  let webView : WebView
   @Binding var shouldPopToRootView : Bool
   
-//  init(albumId: String) {
-//    self.albumId = albumId
-//    self.webView = WebView(url: URL(string: baseUrl + "/photo_albums/" + albumId)!)
-//  }
+  init(shouldPopToRootView: Binding<Bool>) {
+    self._shouldPopToRootView = shouldPopToRootView
+    self.webView = WebView(url: URL(string: baseUrl)!)
+  }
   
   var body: some View {
     webView
       .navigationBarBackButtonHidden(true)
       .navigationBarItems(leading: btnBack)
   }
-  
-  @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
   
   var btnBack : some View { Button(action: {
     self.shouldPopToRootView = false
