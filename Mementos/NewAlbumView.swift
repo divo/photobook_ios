@@ -72,15 +72,15 @@ struct NewAlbumView: View {
   }
 
   func upload(image: ImageModel) {
-    switch image.state {
+    switch image.status {
     case .waiting:
-      image.state = .uploading
+      image.status = .uploading
       client.direct_upload(csrf: viewModel.csrfToken!, imageModel: image) { response in
         switch response {
         case .success(let signed_id):
-          image.state = .uploaded(signed_id)
+          image.status = .uploaded(signed_id)
         case .failure(_):
-          image.state = .failed
+          image.status = .failed
         }
       }
     default:

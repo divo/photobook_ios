@@ -12,19 +12,19 @@ import ImageMetadataUtil
 import UniformTypeIdentifiers
 import CryptoKit
 
-enum ImageState {
+enum ImageStatus {
   case waiting
   case uploading
   case uploaded(String)
   case failed
 }
 
-class ImageModel: Hashable, Equatable {
+class ImageModel: Hashable, Equatable, ObservableObject {
   let id: String
   let uiImage: UIImage
   let metadata: [String : Any]?
   let image: Image
-  var state: ImageState = .waiting
+  var status: ImageStatus = .waiting
   
   init(id: String?, uiImage: UIImage, metadata: [String : Any]?) {
     self.id = id ?? UUID().uuidString
