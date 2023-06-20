@@ -15,21 +15,30 @@ enum ClientError: Error {
   case CSRFNotFound
 }
 
+struct DirectUploadResponse: Decodable {
+  let id: String
+  let direct_upload: DirectUploadData
+  let signed_id: String
+  
+  struct DirectUploadData: Decodable {
+    let url: URL
+    let headers: [String: String]
+  }
+}
+
+struct CreateAlbumResponse: Decodable {
+  let id: String
+  let name: String
+  let url: URL
+}
+
 //TODO: Allow arbitrary loads is set for testing, delete it before release
 class Client {
+#if DEBUG
   let host = "http://192.168.0.88:3000"
-//  let host = "https://mementos.com"
-  
-  struct DirectUploadResponse: Decodable {
-    let id: String
-    let direct_upload: DirectUploadData
-    let signed_id: String
-    
-    struct DirectUploadData: Decodable {
-      let url: URL
-      let headers: [String: String]
-    }
-  }
+#else
+  let host = "https://mementos.com"
+#endif
   
   // Followed https://cameronbothner.com/activestorage-beyond-rails-views/
   func direct_upload(csrf: String, imageModel: ImageModel, completion: @escaping (Result<String, Error>) -> ()) {
@@ -78,37 +87,7 @@ class Client {
     }
   }
   
-//  func upload_image(data: Data) {
-//    //    AF.upload(data, to: "http://192.168.0.88:3000/rails/active_storage/direct_uploads").responseDecodable(of: DecodableType.self) { response in
-//    //        debugPrint(response)
-//    //    }
-//    let cookies = AF.session.configuration.httpCookieStorage!.cookies!
-//    let header_cookie = HTTPCookie.requestHeaderFields(with: cookies)
-//    var headers = HTTPHeaders(header_cookie)
-//
-//    AF.request("http://192.168.0.88:3000/photo_albums/new", method: .get, headers: headers).responseString { response in
-//      switch response.result {
-//      case.success(let body):
-//        let csrfToken = self.extractCSRFToken(from: body)!
-//        headers.add(name: "X-CSRF-Token", value: csrfToken)
-//
-//        AF.upload( multipartFormData: { multipartFormData in
-//          multipartFormData.append(data, withName: "blob", fileName: "file0", mimeType: "image/jpeg")
-//        }, to: "http://192.168.0.88:3000/rails/active_storage/direct_uploads.json", headers: headers).uploadProgress { progress in
-//          print("Upload progress: \(progress.fractionCompleted)")
-//        }
-//        .responseString { response in
-//          print(response)
-//        }
-//
-//      case .failure(let error):
-//        // TODO: Something
-//        print(error.localizedDescription)
-//      }
-//    }
-//  }
-
-  func create_album(csrf:String, title: String, images: [ImageModel]) {
+  func create_album(csrf:String, title: String, images: [ImageModel], completion: @escaping (Result<CreateAlbumResponse, AFError>) -> ()) {
     let url = self.host + "/photo_albums.json"
     let headers = self.header_cookies(csrf)
     let image_tokens = images.compactMap { image in
@@ -121,49 +100,11 @@ class Client {
     }
     
     let params = ["photo_album": ["name": title, "images": image_tokens]]
-    AF.request(url, method: .post, parameters: params, headers: headers).responseString { response in  
-        print(response)
+    AF.request(url, method: .post, parameters: params, headers: headers).responseDecodable(of: CreateAlbumResponse.self) { response in
+      completion(response.result)
     }
-
   }
-  
-//  func create_album(title: String, imageData: Data) {
-//    let url = "http://192.168.0.88:3000/photo_albums.json"
-//    let params = ["title": title]
-//
-//    // The cookie should always be there as Rails will prompt the user to login if needed
-//    // and we try to grab it after every request.
-//    // If cookie is not there we shouldn't have got this far and crash
-//    let cookies = AF.session.configuration.httpCookieStorage!.cookies!
-//    let header_cookie = HTTPCookie.requestHeaderFields(with: cookies)
-//    var headers = HTTPHeaders(header_cookie)
-//
-//    AF.request("http://192.168.0.88:3000/photo_albums/new", method: .get, headers: headers).responseString { response in
-//      switch response.result {
-//      case.success(let body):
-//        let csrfToken = self.extractCSRFToken(from: body)!
-//        headers.add(name: "X-CSRF-Token", value: csrfToken)
-//
-//        //        AF.upload(multipartFormData: { multipartFormData in
-//        //          for (index, data) in imageData.enumerated() {
-//        //            multipartFormData.append(data.value, withName: "file\(index)", filename: data.key, mimeType: "image/jpeg")
-//        //          }
-//        //        }, to: "http://192.168.0.88:300/rails/active_storage/direct_uploads").uploadProgress { progress in
-//        //          print("Upload progress: \(progress.fractionCompleted)")
-//        //        }
-//        //        .responseString { response
-//        //          print(response)
-//        //        }
-//        //        AF.request(url, method: .post, parameters: params, headers: headers).responseString { response in
-//        //          print(response)
-//        //        }
-//      case .failure(let error):
-//        // TODO: Something
-//        print(error.localizedDescription)
-//      }
-//    }
-//  }
-  
+ 
   private func header_cookies(_ csrf: String? = nil) -> HTTPHeaders {
     let cookies = AF.session.configuration.httpCookieStorage!.cookies!
     let header_cookie = HTTPCookie.requestHeaderFields(with: cookies)
