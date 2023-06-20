@@ -64,11 +64,12 @@ extension ImageModel {
 
 extension ImageModel {
   // Converting everything to JPEG on device. I think this is ok do, cuts down on upload size
+  // If this is changed, update the file ext bit below
   func to_json(data: Data) -> [String : [String: String]] {
       let checksum = Insecure.MD5.hash(data: data)
     
     return ["blob": [
-      "filename" : self.id,
+      "filename" : self.id + ".jpg",
       "content_type" : UTType.jpeg.preferredMIMEType!,
       "byte_size" : String(data.count),
       "checksum": Data(checksum).base64EncodedString()

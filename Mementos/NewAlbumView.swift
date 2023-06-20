@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import PhotosUI
 
+
 struct NewAlbumView: View {
   @ObservedObject var viewModel = NewAlbumViewModel()
   @State var readWriteStatus = PHPhotoLibrary.authorizationStatus(for: .readWrite)
@@ -51,11 +52,8 @@ struct NewAlbumView: View {
             Text("Select Photos").padding(20)
           }
         }
-        Button("Test") {
-          self.client.direct_upload(csrf: self.viewModel.csrfToken!, imageModel: self.viewModel.images.first!) { response in
-            print(response)
-          }
-          print("Test")
+        Button("Create Album") {
+          self.client.create_album(csrf: self.viewModel.csrfToken!, title: self.viewModel.title, images: self.viewModel.images)
         }
       }
     }.navigationTitle("Create Album").onAppear(perform: onAppear)

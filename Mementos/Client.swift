@@ -34,8 +34,7 @@ class Client {
   // Followed https://cameronbothner.com/activestorage-beyond-rails-views/
   func direct_upload(csrf: String, imageModel: ImageModel, completion: @escaping (Result<String, Error>) -> ()) {
     let direct_upload_url = self.host + "/rails/active_storage/direct_uploads"
-    var headers = self.header_cookies()
-    headers.add(name: "X-CSRF-Token", value: csrf)
+    var headers = self.header_cookies(csrf)
     
     do {
       let imageData = try imageModel.jpegData()
@@ -108,6 +107,25 @@ class Client {
 //      }
 //    }
 //  }
+
+  func create_album(csrf:String, title: String, images: [ImageModel]) {
+    let url = self.host + "/photo_albums.json"
+    let headers = self.header_cookies(csrf)
+    let image_tokens = images.compactMap { image in
+      switch image.status {
+      case .uploaded(let signed_id):
+        return signed_id
+      default:
+        return nil
+      }
+    }
+    
+    let params = ["photo_album": ["name": title, "images": image_tokens]]
+    AF.request(url, method: .post, parameters: params, headers: headers).responseString { response in  
+        print(response)
+    }
+
+  }
   
 //  func create_album(title: String, imageData: Data) {
 //    let url = "http://192.168.0.88:3000/photo_albums.json"
@@ -146,10 +164,15 @@ class Client {
 //    }
 //  }
   
-  private func header_cookies() -> HTTPHeaders {
+  private func header_cookies(_ csrf: String? = nil) -> HTTPHeaders {
     let cookies = AF.session.configuration.httpCookieStorage!.cookies!
     let header_cookie = HTTPCookie.requestHeaderFields(with: cookies)
-    return HTTPHeaders(header_cookie)
+    var headers = HTTPHeaders(header_cookie)
+    if let csrf = csrf {
+      headers.add(name: "X-CSRF-Token", value: csrf)
+    }
+    
+    return headers
   }
   
   // Code grabbed from ChatGPT, a bit out of date but this is all hacky anyway
