@@ -47,17 +47,11 @@ class WebViewDataModel: NSObject, ObservableObject, WKNavigationDelegate{
   
   func fetch_rails_cookie() {
     webView.webDataStore.httpCookieStore.getAllCookies { cookies in
-      self.railsCookie = cookies.first { cookie in cookie.name == "_photobook_rails_session" }
-      // TODO: If I need to force the user to login this can't stay here
-      if let cookie = self.railsCookie {
-        AF.session.configuration.httpCookieStorage?.setCookie(cookie)
-      }
+      AF.session.configuration.httpCookieStorage?.setCookies(cookies, for: self.webView.url, mainDocumentURL: nil)
     }
   }
   
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-    if railsCookie == nil {
-      fetch_rails_cookie()
-    }
+    fetch_rails_cookie()
   }
 }
