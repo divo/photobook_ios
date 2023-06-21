@@ -105,11 +105,14 @@ struct NewAlbumView: View {
     List(viewModel.images, id: \.self) { image in
       HStack {
         Spacer()
-        image.image
-          .resizable()
-          .aspectRatio(contentMode: .fit)
-          .frame(height: 250)
-          .clipped()
+        VStack {
+          image.image
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(height: 250)
+            .clipped()
+          ProgressView(value: image.uploadProgress)
+        }
         Spacer()
       }
     }
