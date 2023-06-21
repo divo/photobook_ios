@@ -12,6 +12,7 @@ import PhotosUI
 class NewAlbumViewModel: ObservableObject {
   var csrfToken: String?
   var title: String = ""
+  var alertMessage = ""
   var imageAddedCallback: ((ImageModel) -> ())? = nil
   @Published var images: [ImageModel] = [] // Upload images as they are appended here
   @Published var imageSelections: [PhotosPickerItem] = [] {

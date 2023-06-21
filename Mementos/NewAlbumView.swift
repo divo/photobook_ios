@@ -11,21 +11,31 @@ import PhotosUI
 
 
 struct NewAlbumView: View {
-  @ObservedObject var viewModel = NewAlbumViewModel()
-  @State var readWriteStatus = PHPhotoLibrary.authorizationStatus(for: .readWrite)
-  @State var pushShow = false
   let client = Client()
+  let minPhotos = 30
+  
+  @ObservedObject var viewModel = NewAlbumViewModel()
   @Binding var rootIsActive: Bool
   
+  // TODO: Add into view model
+  @State var readWriteStatus = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+  @State var pushShow = false
   @State var presentPicker = false
+  @State var showingAlert = false
   
   var body: some View {
     VStack {
       titleField()
+      if viewModel.images.isEmpty {
+        VStack {
+          Text("Attach some photos to get started")
+          Text(" Your album must have at least " + String(minPhotos))
+        }
+      }
       photoList()
       createAlbumButton()
       showNavigationLink()
-           
+      
    }.navigationTitle("Create Album").onAppear(perform: onAppear)
       .floatingActionButton(color: .blue, image: Image("attach")) {
         if readWriteStatus != .authorized && readWriteStatus != .limited {
@@ -93,16 +103,25 @@ struct NewAlbumView: View {
  
   func createAlbumButton() -> some View {
     Button("Create Album") {
-      self.client.create_album(csrf: self.viewModel.csrfToken!, title: self.viewModel.title, images: self.viewModel.images) { result in
-        switch result {
-        case .success(let album):
-          print("Album created: " + album.id)
-          self.pushShow = true
-        case .failure(let error):
-          print(error)
+      switch isValid() {
+      case .failure(let error):
+        self.viewModel.alertMessage = error.localizedDescription
+        self.showingAlert = true
+      case.success(_):
+        self.client.create_album(csrf: self.viewModel.csrfToken!, title: self.viewModel.title, images: self.viewModel.images) { result in
+          switch result {
+          case .success(let album):
+            print("Album created: " + album.id)
+            self.pushShow = true
+          case .failure(let error):
+            print(error)
+          }
         }
       }
     }.padding(20)
+      .alert(viewModel.alertMessage, isPresented: $showingAlert) {
+        Button("OK", role: .cancel) { }
+      }
   }
   
   func showNavigationLink() -> some View {
@@ -121,6 +140,16 @@ struct NewAlbumView: View {
       self.viewModel.csrfToken = csrfToken
     }
   }
+   
+  func isValid() -> Result<String, ValidationError> {
+    if viewModel.title.isEmpty {
+      return Result.failure(.title)
+    } else if(viewModel.images.count < minPhotos) {
+      return Result.failure(.images)
+    } else {
+      return Result.success("")
+    }
+  }
 
   func upload(image: ImageModel) {
     switch image.status {
@@ -136,6 +165,22 @@ struct NewAlbumView: View {
       }
     default:
       break
+    }
+  }
+}
+
+enum ValidationError: Error {
+  case title
+  case images
+}
+
+extension ValidationError: LocalizedError {
+  public var errorDescription: String? {
+    switch self {
+    case .title:
+      return NSLocalizedString("Your album must have a title", comment: "My error")
+    case .images:
+      return NSLocalizedString("You need at least 30 photos", comment: "error")
     }
   }
 }
