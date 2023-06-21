@@ -167,6 +167,8 @@ struct NewAlbumView: View {
       return Result.failure(.title)
     } else if(viewModel.images.count < minPhotos) {
       return Result.failure(.images)
+    } else if(!viewModel.imagesUploaded()) {
+      return Result.failure(.waiting)
     } else {
       return Result.success("")
     }
@@ -193,6 +195,7 @@ struct NewAlbumView: View {
 enum ValidationError: Error {
   case title
   case images
+  case waiting
 }
 
 extension ValidationError: LocalizedError {
@@ -202,6 +205,8 @@ extension ValidationError: LocalizedError {
       return NSLocalizedString("Your album must have a title", comment: "My error")
     case .images:
       return NSLocalizedString("You need at least 30 photos", comment: "error")
+    case .waiting:
+      return NSLocalizedString("Please wait for image uploads to finish", comment: "error")
     }
   }
 }

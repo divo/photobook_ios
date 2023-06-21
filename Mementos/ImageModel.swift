@@ -25,6 +25,7 @@ class ImageModel: Hashable, Equatable, ObservableObject {
   let metadata: [String : Any]?
   let image: Image
   var status: ImageStatus = .waiting
+  @Published var uploadProgress: Double = .zero
   
   init(id: String?, uiImage: UIImage, metadata: [String : Any]?) {
     self.id = id ?? UUID().uuidString
@@ -39,6 +40,14 @@ class ImageModel: Hashable, Equatable, ObservableObject {
 
    static func ==(lhs: ImageModel, rhs: ImageModel) -> Bool {
     return lhs.id == rhs.id
+  }
+  
+  func uploaded() -> Bool {
+    if case .uploaded(let string) = status {
+      return true
+    } else {
+      return false
+    }
   }
 }
 

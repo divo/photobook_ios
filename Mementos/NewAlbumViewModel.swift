@@ -23,6 +23,12 @@ class NewAlbumViewModel: ObservableObject {
     }
   }
   
+  func imagesUploaded() -> Bool {
+    images.map { image in
+      image.uploaded()
+    }.allSatisfy { $0 }
+  }
+  
   private func loadTransferable(from imageSelection: PhotosPickerItem) -> Progress {
     return imageSelection.loadTransferable(type: TransferableImageWithMetadata.self) { result in
       DispatchQueue.main.async {
