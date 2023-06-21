@@ -49,18 +49,14 @@ struct NewAlbumView: View {
         
       }
       photoList()
-      createAlbumButton()
+      HStack {
+        attachButton()
+        createAlbumButton().padding(.horizontal)
+      }
       showNavigationLink()
       
-   }.navigationTitle("Create Album").onAppear(perform: onAppear)
-      .floatingActionButton(color: .blue, image: Image("attach")) {
-        if readWriteStatus != .authorized && readWriteStatus != .limited {
-          // TODO: Test this logic makes sense and we can request again!
-          requestAccess()
-       } else {
-          self.presentPicker = true
-        }
-      }.photosPicker(isPresented: self.$presentPicker, selection: $viewModel.imageSelections, maxSelectionCount: 150, matching: .images, photoLibrary: .shared())
+    }.navigationTitle("Create Album").onAppear(perform: onAppear)
+      .photosPicker(isPresented: self.$presentPicker, selection: $viewModel.imageSelections, maxSelectionCount: 150, matching: .images, photoLibrary: .shared())
   }
   
   func requestAccess() {
@@ -77,6 +73,22 @@ struct NewAlbumView: View {
   }
   
   // MARK - UI compontents
+  func attachButton() -> some View {
+    Button {
+      if readWriteStatus != .authorized && readWriteStatus != .limited {
+        // TODO: Test this logic makes sense and we can request again!
+        requestAccess()
+      } else {
+        self.presentPicker = true
+      }
+    } label: {
+      Image("attach")
+        .cornerRadius(6)
+        .overlay(RoundedRectangle(cornerRadius: 6)
+          .stroke(Color.orange, lineWidth: 0))
+    }
+  }
+  
   func titleField() -> some View {
     TextField("Album Title", text: $viewModel.title)
       .padding([.leading, .trailing], 10)
@@ -102,21 +114,7 @@ struct NewAlbumView: View {
       }
     }
   }
-  
-  func photoPermissionButton() -> some View {
-    Button("Allow photo access") {
-      PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
-        // https://developer.apple.com/documentation/photokit/delivering_an_enhanced_privacy_experience_in_your_photos_app
-        // TODO: Display status and remind user if it's limited
-        readWriteStatus = status
-      }
-    }.padding(20.0) //TODO: Style this thing
-      .frame(width: 300.0)
-      .foregroundColor(/*@START_MENU_TOKEN@*/.white/*@END_MENU_TOKEN@*/)
-      .background(Style.secondaryColor())
-      .cornerRadius(/*@START_MENU_TOKEN@*/6.0/*@END_MENU_TOKEN@*/)
-  }
- 
+
   func createAlbumButton() -> some View {
     Button("Create Album") {
       switch isValid() {
@@ -135,6 +133,10 @@ struct NewAlbumView: View {
         }
       }
     }.padding(20)
+      .frame(width: 200.0)
+      .foregroundColor(/*@START_MENU_TOKEN@*/.white/*@END_MENU_TOKEN@*/)
+      .background(Style.secondaryColor())
+      .cornerRadius(/*@START_MENU_TOKEN@*/6.0/*@END_MENU_TOKEN@*/)
       .alert(viewModel.alertMessage, isPresented: $showingAlert) {
         Button("OK", role: .cancel) { }
       }
