@@ -17,6 +17,8 @@ struct NewAlbumView: View {
   let client = Client()
   @Binding var rootIsActive: Bool
   
+  @State var presentPicker = false
+  
   var body: some View {
     VStack {
       titleField()
@@ -25,8 +27,6 @@ struct NewAlbumView: View {
       HStack {
         if readWriteStatus != .authorized && readWriteStatus != .limited {
           photoPermissionButton()
-        } else {
-          pickerButton()
         }
       }
       
@@ -34,6 +34,9 @@ struct NewAlbumView: View {
       showNavigationLink()
            
    }.navigationTitle("Create Album").onAppear(perform: onAppear)
+      .floatingActionButton(color: .blue, image: Image("attach")) {
+        self.presentPicker = true
+      }.photosPicker(isPresented: self.$presentPicker, selection: $viewModel.imageSelections, maxSelectionCount: 150, matching: .images, photoLibrary: .shared())
   }
   
   // MARK - UI compontents
@@ -76,18 +79,7 @@ struct NewAlbumView: View {
       .background(Style.secondaryColor())
       .cornerRadius(/*@START_MENU_TOKEN@*/6.0/*@END_MENU_TOKEN@*/)
   }
-  
-  func pickerButton() -> some View {
-    PhotosPicker(selection: $viewModel.imageSelections, maxSelectionCount: 150, matching: .images, photoLibrary: .shared()) {
-      Image("attach")
-        .cornerRadius(10)
-        .overlay(RoundedRectangle(cornerRadius: 10)
-          .stroke(Color.orange, lineWidth: 0))
-        .shadow(color: .gray, radius: 1, x: 0, y: 1)
-        .shadow(color: .gray, radius: 3, x: 0, y: 3)
-    }
-  }
-  
+ 
   func createAlbumButton() -> some View {
     Button("Create Album") {
       self.client.create_album(csrf: self.viewModel.csrfToken!, title: self.viewModel.title, images: self.viewModel.images) { result in
