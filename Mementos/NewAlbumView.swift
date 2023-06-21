@@ -23,20 +23,31 @@ struct NewAlbumView: View {
     VStack {
       titleField()
       photoList()
-      // TODO: Test this logic makes sense and we can request again!
-      HStack {
-        if readWriteStatus != .authorized && readWriteStatus != .limited {
-          photoPermissionButton()
-        }
-      }
-      
       createAlbumButton()
       showNavigationLink()
            
    }.navigationTitle("Create Album").onAppear(perform: onAppear)
       .floatingActionButton(color: .blue, image: Image("attach")) {
-        self.presentPicker = true
+        if readWriteStatus != .authorized && readWriteStatus != .limited {
+          // TODO: Test this logic makes sense and we can request again!
+          requestAccess()
+       } else {
+          self.presentPicker = true
+        }
       }.photosPicker(isPresented: self.$presentPicker, selection: $viewModel.imageSelections, maxSelectionCount: 150, matching: .images, photoLibrary: .shared())
+  }
+  
+  func requestAccess() {
+    PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+      // https://developer.apple.com/documentation/photokit/delivering_an_enhanced_privacy_experience_in_your_photos_app
+      // TODO: Display status and remind user if it's limited
+      readWriteStatus = status
+      if readWriteStatus == .authorized || readWriteStatus == .limited {
+        self.presentPicker = true
+      } else {
+        // TODO: Handle again, maybe recurse, fuck em
+      }
+    }
   }
   
   // MARK - UI compontents
