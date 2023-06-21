@@ -148,7 +148,7 @@ struct NewAlbumView: View {
   func showNavigationLink() -> some View {
     NavigationLink(destination: ShowAlbumView(shouldPopToRootView: self.$rootIsActive), isActive: self.$pushShow) { EmptyView() }
       .isDetailLink(false)
-      .navigationTitle("Title")
+      .navigationTitle("New Album")
   }
   
   // MARK - Behaviour
