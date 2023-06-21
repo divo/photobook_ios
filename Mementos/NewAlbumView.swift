@@ -12,7 +12,11 @@ import PhotosUI
 
 struct NewAlbumView: View {
   let client = Client()
+#if DEBUG
   let minPhotos = 30
+#else
+  let minPhotos = 1
+#endif
   
   @ObservedObject var viewModel = NewAlbumViewModel()
   @Binding var rootIsActive: Bool
@@ -28,9 +32,21 @@ struct NewAlbumView: View {
       titleField()
       if viewModel.images.isEmpty {
         VStack {
+          Image(systemName: "paperclip")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 50, height: 50)
+            .padding(5)
+          
           Text("Attach some photos to get started")
           Text(" Your album must have at least " + String(minPhotos))
-        }
+        }.padding(20.0) //TODO: Style this thing
+          .foregroundColor(.white)
+          .background(Style.secondaryColor()) // Left here, need more colors
+          .border(Style.secondaryColor(), width: 2)
+          .cornerRadius(/*@START_MENU_TOKEN@*/6.0/*@END_MENU_TOKEN@*/)
+          .shadow(color: .gray, radius: 2, x: 0, y: 2)
+        
       }
       photoList()
       createAlbumButton()
