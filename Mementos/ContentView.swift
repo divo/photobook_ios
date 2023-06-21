@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
 #if DEBUG
-  var webView = WebView(url: URL(string: "http://192.168.0.87:3000/photo_albums")!)
+  var webView = WebView(url: URL(string: "http://192.168.0.88:3000/photo_albums")!)
 #else
-  var webView = WebView(url: URL(string: "https://mementos.com/photo_albums")!)
+  var webView = WebView(url: URL(string: "https://mementos.ink/photo_albums")!)
 #endif
   
   @State var isActive: Bool = false

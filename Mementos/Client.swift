@@ -37,7 +37,7 @@ class Client {
 #if DEBUG
   let host = "http://192.168.0.88:3000"
 #else
-  let host = "https://mementos.com"
+  let host = "https://mementos.ink"
 #endif
   
   // Followed https://cameronbothner.com/activestorage-beyond-rails-views/
@@ -67,6 +67,9 @@ class Client {
     }
   }
   
+  // This will fail the first time in development because the
+  // needs to grant permission to make requests on local network
+  // Works find in production
   func request_csrf(completion: @escaping (String?) -> ()) {
     let url = host + "/photo_albums/new"
     let headers = header_cookies()

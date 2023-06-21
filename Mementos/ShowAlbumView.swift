@@ -10,9 +10,9 @@ import WebKit
 
 struct ShowAlbumView: View {
 #if DEBUG
-  let baseUrl = "http://192.168.0.87:3000"
+  let baseUrl = "http://192.168.0.88:3000"
 #else
-  let baseUrl = "https://mementos.com"
+  let baseUrl = "https://mementos.ink"
 #endif
   
   let webView : WebView
