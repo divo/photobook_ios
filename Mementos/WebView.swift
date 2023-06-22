@@ -11,14 +11,14 @@ import SwiftUI
 import Alamofire
 
 struct WebView: UIViewRepresentable{
-  let url: URL
+  @Binding var url: URL
   let webDataStore = WKWebsiteDataStore.default()
   let configuration: WKWebViewConfiguration
   let webView: WKWebView
   let dataModel: WebViewDataModel
   
-  init(url: URL) {
-    self.url = url
+  init(url: Binding<URL>) {
+    self._url = url
     self.configuration = WKWebViewConfiguration()
     configuration.websiteDataStore = webDataStore
     self.webView = WKWebView(frame: .zero, configuration: configuration)

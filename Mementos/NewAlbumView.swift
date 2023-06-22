@@ -13,9 +13,9 @@ import PhotosUI
 struct NewAlbumView: View {
   let client = Client()
 #if DEBUG
-  let minPhotos = 30
-#else
   let minPhotos = 1
+#else
+  let minPhotos = 30
 #endif
   
   @ObservedObject var viewModel = NewAlbumViewModel()
@@ -129,6 +129,7 @@ struct NewAlbumView: View {
           switch result {
           case .success(let album):
             print("Album created: " + album.id)
+            self.viewModel.albumURL = URL(string: Constants.baseURL + "/photo_albums/\(album.id)")!
             self.pushShow = true
           case .failure(let error):
             print(error)
@@ -146,7 +147,7 @@ struct NewAlbumView: View {
   }
   
   func showNavigationLink() -> some View {
-    NavigationLink(destination: ShowAlbumView(shouldPopToRootView: self.$rootIsActive), isActive: self.$pushShow) { EmptyView() }
+    NavigationLink(destination: ShowAlbumView(shouldPopToRootView: self.$rootIsActive, url: $viewModel.albumURL), isActive: self.$pushShow) { EmptyView() }
       .isDetailLink(false)
       .navigationTitle("New Album")
   }
