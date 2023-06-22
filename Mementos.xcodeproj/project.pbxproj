@@ -117,8 +117,8 @@
 		930993F02A3A001E00FDD3AB /* Mementos */ = {
 			isa = PBXGroup;
 			children = (
-				934E6D1F2A42F95F00EF6770 /* FloatingButton.swift */,
 				935B00202A3B786D0016829B /* Info.plist */,
+				934E6D1F2A42F95F00EF6770 /* FloatingButton.swift */,
 				935B00192A3B6FEC0016829B /* ImageModel.swift */,
 				935B001E2A3B76900016829B /* Client.swift */,
 				930993F12A3A001E00FDD3AB /* MementosApp.swift */,
