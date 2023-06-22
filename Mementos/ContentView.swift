@@ -14,7 +14,10 @@ struct ContentView: View {
   var body: some View {
     NavigationView {
       VStack {
-        WebView(url: $url)
+        let webView = WebView(url: $url)
+        webView.onAppear {
+          webView.reload()
+        }
         NavigationLink(destination: NewAlbumView(rootIsActive: self.$isActive), isActive: self.$isActive) {
           Text("New Album")
             .padding(20.0)

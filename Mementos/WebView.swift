@@ -37,6 +37,10 @@ struct WebView: UIViewRepresentable{
     let request = URLRequest(url: url)
     (uiView as? WKWebView)?.load(request)
   }
+  
+  func reload() {
+    webView.reload()
+  }
 }
 
 // TODO: If this remains the UIDelegate it needs to be renamed
