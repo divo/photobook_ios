@@ -34,15 +34,9 @@ struct CreateAlbumResponse: Decodable {
 
 //TODO: Allow arbitrary loads is set for testing, delete it before release
 class Client {
-#if DEBUG
-  let host = "http://192.168.0.88:3000"
-#else
-  let host = "https://mementos.ink"
-#endif
-  
   // Followed https://cameronbothner.com/activestorage-beyond-rails-views/
   func direct_upload(csrf: String, imageModel: ImageModel, completion: @escaping (Result<String, Error>) -> ()) {
-    let direct_upload_url = self.host + "/rails/active_storage/direct_uploads"
+    let direct_upload_url = Constants.baseURL + "/rails/active_storage/direct_uploads"
     var headers = self.header_cookies(csrf)
     
     do {
@@ -73,7 +67,7 @@ class Client {
   // needs to grant permission to make requests on local network
   // Works find in production
   func request_csrf(completion: @escaping (String?) -> ()) {
-    let url = host + "/photo_albums/new"
+    let url = Constants.baseURL + "/photo_albums/new"
     let headers = header_cookies()
     AF.request(url, method: .get, headers: headers).responseString { response in
       switch response.result {
@@ -93,7 +87,7 @@ class Client {
   }
   
   func create_album(csrf:String, title: String, images: [ImageModel], completion: @escaping (Result<CreateAlbumResponse, AFError>) -> ()) {
-    let url = self.host + "/photo_albums.json"
+    let url = Constants.baseURL + "/photo_albums.json"
     let headers = self.header_cookies(csrf)
     let image_tokens = images.compactMap { image in
       switch image.status {

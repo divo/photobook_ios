@@ -9,18 +9,12 @@ import SwiftUI
 import WebKit
 
 struct ShowAlbumView: View {
-#if DEBUG
-  let baseUrl = "http://192.168.0.88:3000"
-#else
-  let baseUrl = "https://mementos.ink"
-#endif
-  
   let webView : WebView
   @Binding var shouldPopToRootView : Bool
   
-  init(shouldPopToRootView: Binding<Bool>) {
+  init(shouldPopToRootView: Binding<Bool>, url: Binding<URL>) {
     self._shouldPopToRootView = shouldPopToRootView
-    self.webView = WebView(url: URL(string: baseUrl)!)
+    self.webView = WebView(url: url)
   }
   
   var body: some View {

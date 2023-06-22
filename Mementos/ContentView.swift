@@ -8,18 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-#if DEBUG
-  var webView = WebView(url: URL(string: "http://192.168.0.88:3000/photo_albums")!)
-#else
-  var webView = WebView(url: URL(string: "https://mementos.ink/photo_albums")!)
-#endif
-  
+  @State var url = URL(string: Constants.baseURL + "/photo_albums")!
   @State var isActive: Bool = false
   
   var body: some View {
     NavigationView {
       VStack {
-        webView
+        WebView(url: $url)
         NavigationLink(destination: NewAlbumView(rootIsActive: self.$isActive), isActive: self.$isActive) {
           Text("New Album")
             .padding(20.0)
