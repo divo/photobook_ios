@@ -17,12 +17,12 @@ struct WebView: UIViewRepresentable{
   let webView: WKWebView
   let dataModel: WebViewDataModel
   
-  init(url: Binding<URL>) {
+  init(url: Binding<URL>, navigationActions: [String]? = nil, navigationCallback: ((String, String) -> ())? = nil) {
     self._url = url
     self.configuration = WKWebViewConfiguration()
     configuration.websiteDataStore = webDataStore
     self.webView = WKWebView(frame: .zero, configuration: configuration)
-    self.dataModel = WebViewDataModel()
+    self.dataModel = WebViewDataModel(navigationActions: navigationActions, navigationCallback: navigationCallback)
     
     webView.navigationDelegate = dataModel
     dataModel.webView = self
@@ -47,7 +47,14 @@ struct WebView: UIViewRepresentable{
 //class WebViewDataModel: ObservableObject {
 class WebViewDataModel: NSObject, ObservableObject, WKNavigationDelegate{
   @Published var railsCookie: HTTPCookie?
+  let navigationActions: [String]?
+  let navigationCallback: ((String, String) -> ())?
   var webView: WebView! // Mist be a cleaner pattern for this, I've just forgotten it
+  
+  init(navigationActions: [String]?, navigationCallback: ((String, String) -> ())?) {
+    self.navigationActions = navigationActions
+    self.navigationCallback = navigationCallback
+  }
   
   func fetch_rails_cookie() {
     webView.webDataStore.httpCookieStore.getAllCookies { cookies in
@@ -57,5 +64,24 @@ class WebViewDataModel: NSObject, ObservableObject, WKNavigationDelegate{
   
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
     fetch_rails_cookie()
+  }
+  
+  func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    guard let url = navigationAction.request.url else {
+      decisionHandler(.cancel)
+      return
+    }
+    
+    if let navigationActions = self.navigationActions,
+       let navigationCallback = self.navigationCallback,
+       let action = url.host() {
+      if navigationActions.contains(action) {
+        let destination = url.lastPathComponent
+        navigationCallback(action, destination)
+        decisionHandler(.cancel)
+        return
+      }
+    }
+    decisionHandler(.allow)
   }
 }

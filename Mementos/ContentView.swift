@@ -10,14 +10,23 @@ import SwiftUI
 struct ContentView: View {
   @State var url = URL(string: Constants.baseURL + "/photo_albums")!
   @State var isActive: Bool = false
+  @State var showUrl = URL(string: Constants.baseURL)!
+  @State var pushShow: Bool = false
   
   var body: some View {
     NavigationView {
       VStack {
-        let webView = WebView(url: $url)
+        let webView = WebView(url: $url, navigationActions: ["photo_albums"]) { action, destination in
+          if action == "photo_albums" {
+            showUrl = URL(string: Constants.baseURL + "/photo_albums/\(destination)")!
+            pushShow = true
+          }
+        }
+        
         webView.onAppear {
           webView.reload()
         }
+        
         NavigationLink(destination: NewAlbumView(rootIsActive: self.$isActive), isActive: self.$isActive) {
           Text("New Album")
             .padding(20.0)
@@ -26,10 +35,13 @@ struct ContentView: View {
             .background(Style.primaryColor())
             .cornerRadius(/*@START_MENU_TOKEN@*/6.0/*@END_MENU_TOKEN@*/)
         }.isDetailLink(false)
-        .navigationTitle("Mementos")
+      
+        NavigationLink(destination: WebView(url: $showUrl), isActive: $pushShow) { EmptyView() }
       }
     }
   }
+  
+  
 }
 
 struct ContentView_Previews: PreviewProvider {
