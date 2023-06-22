@@ -9,17 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
   @State var url = URL(string: Constants.baseURL + "/photo_albums")!
-  @State var isActive: Bool = false
+  @State var pushNew: Bool = false
   @State var showUrl = URL(string: Constants.baseURL)!
   @State var pushShow: Bool = false
   
   var body: some View {
     NavigationView {
       VStack {
-        let webView = WebView(url: $url, navigationActions: ["photo_albums"]) { action, destination in
-          if action == "photo_albums" {
+        let webView = WebView(url: $url, navigationActions: ["show_album", "new_album"]) { action, destination in
+          if action == "show_album" {
             showUrl = URL(string: Constants.baseURL + "/photo_albums/\(destination)")!
             pushShow = true
+          } else if action == "new_album" {
+            pushNew = true
           }
         }
         
@@ -27,16 +29,9 @@ struct ContentView: View {
           webView.reload()
         }
         
-        NavigationLink(destination: NewAlbumView(rootIsActive: self.$isActive), isActive: self.$isActive) {
-          Text("New Album")
-            .padding(20.0)
-            .frame(width: 300.0)
-            .foregroundColor(/*@START_MENU_TOKEN@*/.white/*@END_MENU_TOKEN@*/)
-            .background(Style.primaryColor())
-            .cornerRadius(/*@START_MENU_TOKEN@*/6.0/*@END_MENU_TOKEN@*/)
-        }.isDetailLink(false)
-      
+        NavigationLink(destination: NewAlbumView(rootIsActive: self.$pushNew), isActive: self.$pushNew) { EmptyView() }.isDetailLink(false)
         NavigationLink(destination: WebView(url: $showUrl), isActive: $pushShow) { EmptyView() }
+          .navigationTitle("Mementos")
       }
     }
   }
