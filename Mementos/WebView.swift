@@ -10,6 +10,26 @@ import WebKit
 import SwiftUI
 import Alamofire
 
+struct WebViewContainer: View {
+  let webView: WebView
+  @Binding var title: String
+  
+  init(url: Binding<URL>, navigationActions: [String]? = nil, navigationCallback: ((String, String, [URLQueryItem]?) -> ())? = nil, title: Binding<String>) {
+    self._title = title
+    self.webView = WebView(url: url, navigationActions: navigationActions, navigationCallback: navigationCallback)
+  }
+  
+  var body: some View {
+    webView
+      .toolbar(content: {
+        ToolbarItem(placement: .principal) { // <3>
+          Text(title).font(.headline)
+        }
+      })
+  }
+  
+}
+
 struct WebView: UIViewRepresentable{
   @Binding var url: URL
   let webDataStore = WKWebsiteDataStore.default()
@@ -17,7 +37,7 @@ struct WebView: UIViewRepresentable{
   let webView: WKWebView
   let dataModel: WebViewDataModel
   
-  init(url: Binding<URL>, navigationActions: [String]? = nil, navigationCallback: ((String, String) -> ())? = nil) {
+  init(url: Binding<URL>, navigationActions: [String]? = nil, navigationCallback: ((String, String, [URLQueryItem]?) -> ())? = nil) {
     self._url = url
     self.configuration = WKWebViewConfiguration()
     configuration.websiteDataStore = webDataStore
@@ -48,10 +68,10 @@ struct WebView: UIViewRepresentable{
 class WebViewDataModel: NSObject, ObservableObject, WKNavigationDelegate{
   @Published var railsCookie: HTTPCookie?
   let navigationActions: [String]?
-  let navigationCallback: ((String, String) -> ())?
+  let navigationCallback: ((String, String, [URLQueryItem]?) -> ())?
   var webView: WebView! // Mist be a cleaner pattern for this, I've just forgotten it
   
-  init(navigationActions: [String]?, navigationCallback: ((String, String) -> ())?) {
+  init(navigationActions: [String]?, navigationCallback: ((String, String, [URLQueryItem]?) -> ())?) {
     self.navigationActions = navigationActions
     self.navigationCallback = navigationCallback
   }
@@ -77,7 +97,8 @@ class WebViewDataModel: NSObject, ObservableObject, WKNavigationDelegate{
        let action = url.host() {
       if navigationActions.contains(action) {
         let destination = url.lastPathComponent
-        navigationCallback(action, destination)
+        let queryItems = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems
+        navigationCallback(action, destination, queryItems)
         decisionHandler(.cancel)
         return
       }

@@ -12,12 +12,18 @@ struct ContentView: View {
   @State var pushNew: Bool = false
   @State var showUrl = URL(string: Constants.baseURL)!
   @State var pushShow: Bool = false
+  @State var childTitle: String = "Mementos"
   
   var body: some View {
     NavigationView {
       VStack {
-        let webView = WebView(url: $url, navigationActions: ["show_album", "new_album"]) { action, destination in
+        let webView = WebView(url: $url, navigationActions: ["show_album", "new_album"]) { action, destination, queryItems in
           if action == "show_album" {
+            if let queryItems = queryItems,
+               let titleParam = queryItems.first(where: { item in item.name == "name" }), // Why in gods name did I call the title "name"
+               let title = titleParam.value {
+              self.childTitle = title
+            }
             showUrl = URL(string: Constants.baseURL + "/photo_albums/\(destination)")!
             pushShow = true
           } else if action == "new_album" {
@@ -30,9 +36,8 @@ struct ContentView: View {
         }
         
         NavigationLink(destination: NewAlbumView(rootIsActive: self.$pushNew), isActive: self.$pushNew) { EmptyView() }.isDetailLink(false)
-        NavigationLink(destination: WebView(url: $showUrl), isActive: $pushShow) { EmptyView() }
-          .navigationTitle("Mementos")
-      }
+        NavigationLink(destination: WebViewContainer(url: $showUrl, title: $childTitle), isActive: $pushShow) { EmptyView() }
+      }.navigationTitle("Mementos")
     }
   }
   
