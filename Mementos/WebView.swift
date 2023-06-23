@@ -13,6 +13,9 @@ import Alamofire
 struct WebViewContainer: View {
   let webView: WebView
   @Binding var title: String
+  @State var profileTitle: String = "Profile"
+  @State var profileUrl = URL(string: Constants.baseURL + "/users/edit/")!
+  @State var pushProfile: Bool = false
   
   init(url: Binding<URL>, navigationActions: [String]? = nil, navigationCallback: ((String, String, [URLQueryItem]?) -> ())? = nil, title: Binding<String>) {
     self._title = title
@@ -20,12 +23,21 @@ struct WebViewContainer: View {
   }
   
   var body: some View {
+    NavigationLink(destination: WebViewContainer(url: $profileUrl, title: $profileTitle), isActive: $pushProfile) { EmptyView() }
     webView
-      .toolbar(content: {
+      .toolbar {
         ToolbarItem(placement: .principal) { // <3>
           Text(title).font(.headline)
         }
-      })
+      }.toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button {
+            self.pushProfile = true
+          } label: {
+            Image(systemName: "person.crop.circle")
+          }
+        }
+      }
   }
   
 }

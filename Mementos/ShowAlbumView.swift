@@ -12,15 +12,29 @@ struct ShowAlbumView: View {
   let webView : WebView
   @Binding var shouldPopToRootView : Bool
   
+  @State var profileTitle: String = "Profile"
+  @State var profileUrl = URL(string: Constants.baseURL + "/users/edit/")!
+  @State var pushProfile: Bool = false
+  
   init(shouldPopToRootView: Binding<Bool>, url: Binding<URL>) {
     self._shouldPopToRootView = shouldPopToRootView
     self.webView = WebView(url: url)
   }
   
   var body: some View {
+    NavigationLink(destination: WebViewContainer(url: $profileUrl, title: $profileTitle), isActive: $pushProfile) { EmptyView() }
     webView
       .navigationBarBackButtonHidden(true)
       .navigationBarItems(leading: btnBack)
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button {
+            self.pushProfile = true
+          } label: {
+            Image(systemName: "person.crop.circle")
+          }
+        }
+      }
   }
   
   var btnBack : some View { Button(action: {

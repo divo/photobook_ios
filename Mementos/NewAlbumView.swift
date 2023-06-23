@@ -27,6 +27,10 @@ struct NewAlbumView: View {
   @State var presentPicker = false
   @State var showingAlert = false
   
+  @State var profileTitle: String = "Profile"
+  @State var profileUrl = URL(string: Constants.baseURL + "/users/edit/")!
+  @State var pushProfile: Bool = false
+  
   var body: some View {
     VStack {
       titleField()
@@ -54,9 +58,19 @@ struct NewAlbumView: View {
         createAlbumButton().padding(.horizontal)
       }
       showNavigationLink()
-      
+      NavigationLink(destination: WebViewContainer(url: $profileUrl, title: $profileTitle), isActive: $pushProfile) { EmptyView() }
+
     }.navigationTitle("Create Album").onAppear(perform: onAppear)
       .photosPicker(isPresented: self.$presentPicker, selection: $viewModel.imageSelections, maxSelectionCount: 150, matching: .images, photoLibrary: .shared())
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button {
+            self.pushProfile = true
+          } label: {
+            Image(systemName: "person.crop.circle")
+          }
+        }
+    }
   }
   
   func requestAccess() {
