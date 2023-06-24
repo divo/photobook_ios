@@ -7,30 +7,36 @@
 
 import SwiftUI
 
+class IndexViewModel: ObservableObject {
+  @Published var url = URL(string: Constants.baseURL + "/photo_albums")!
+  @Published var showUrl = URL(string: Constants.baseURL)!
+  @Published var profileUrl = URL(string: Constants.baseURL + "/users/edit/")!
+  // TODO: Consilidate bools into one string
+  @Published var pushNew: Bool = false
+  @Published var pushShow: Bool = false
+  @Published var pushProfile: Bool = false
+  @Published var childTitle: String = "Mementos"
+  @Published var profileTitle: String = "Profile"
+}
+
 struct IndexView: View {
-  @State var url = URL(string: Constants.baseURL + "/photo_albums")!
-  @State var showUrl = URL(string: Constants.baseURL)!
-  @State var profileUrl = URL(string: Constants.baseURL + "/users/edit/")!
-  @State var pushNew: Bool = false
-  @State var pushShow: Bool = false
-  @State var pushProfile: Bool = false
-  @State var childTitle: String = "Mementos"
-  @State var profileTitle: String = "Profile"
+
+  @ObservedObject var viewModel = IndexViewModel()
 
   var body: some View {
     NavigationView {
       VStack {
-        let webView = WebView(url: $url, navigationActions: ["show_album", "new_album"]) { action, destination, queryItems in
+        let webView = WebView(url: $viewModel.url, navigationActions: ["show_album", "new_album"]) { action, destination, queryItems in
           if action == "show_album" {
             if let queryItems = queryItems,
                let titleParam = queryItems.first(where: { item in item.name == "name" }), // Why in gods name did I call the title "name"
                let title = titleParam.value {
-              self.childTitle = title
+              self.viewModel.childTitle = title
             }
-            showUrl = URL(string: Constants.baseURL + "/photo_albums/\(destination)")!
-            pushShow = true
+            viewModel.showUrl = URL(string: Constants.baseURL + "/photo_albums/\(destination)")!
+            viewModel.pushShow = true
           } else if action == "new_album" {
-            pushNew = true
+            viewModel.pushNew = true
           }
         }
         
@@ -38,14 +44,14 @@ struct IndexView: View {
           webView.reload()
         }
         
-        NavigationLink(destination: NewAlbumView(rootIsActive: self.$pushNew), isActive: self.$pushNew) { EmptyView() }.isDetailLink(false)
-        NavigationLink(destination: WebViewContainer(url: $showUrl, title: $childTitle), isActive: $pushShow) { EmptyView() }
-        NavigationLink(destination: WebViewContainer(url: $profileUrl, title: $profileTitle), isActive: $pushProfile) { EmptyView() }
+        NavigationLink(destination: NewAlbumView(rootIsActive: self.$viewModel.pushNew), isActive: self.$viewModel.pushNew) { EmptyView() }.isDetailLink(false)
+        NavigationLink(destination: WebViewContainer(url: $viewModel.showUrl, title: $viewModel.childTitle), isActive: $viewModel.pushShow) { EmptyView() }
+        NavigationLink(destination: WebViewContainer(url: $viewModel.profileUrl, title: $viewModel.profileTitle), isActive: $viewModel.pushProfile) { EmptyView() }
       }.navigationTitle("Mementos")
         .toolbar {
           ToolbarItem(placement: .navigationBarTrailing) {
             Button {
-              self.pushProfile = true
+              self.viewModel.pushProfile = true
             } label: {
               Image(systemName: "person.crop.circle")
             }
