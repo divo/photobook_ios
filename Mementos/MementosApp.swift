@@ -19,7 +19,7 @@ struct Constants {
 struct MementosApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            IndexView()
         }
     }
 }

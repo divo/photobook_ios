@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct IndexView: View {
   @State var url = URL(string: Constants.baseURL + "/photo_albums")!
   @State var showUrl = URL(string: Constants.baseURL)!
   @State var profileUrl = URL(string: Constants.baseURL + "/users/edit/")!
@@ -16,7 +16,7 @@ struct ContentView: View {
   @State var pushProfile: Bool = false
   @State var childTitle: String = "Mementos"
   @State var profileTitle: String = "Profile"
-  
+
   var body: some View {
     NavigationView {
       VStack {
@@ -59,6 +59,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView()
+    IndexView()
   }
 }

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		930993F22A3A001E00FDD3AB /* MementosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930993F12A3A001E00FDD3AB /* MementosApp.swift */; };
-		930993F42A3A001E00FDD3AB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930993F32A3A001E00FDD3AB /* ContentView.swift */; };
+		930993F42A3A001E00FDD3AB /* IndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930993F32A3A001E00FDD3AB /* IndexView.swift */; };
 		930993F62A3A001F00FDD3AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 930993F52A3A001F00FDD3AB /* Assets.xcassets */; };
 		930993F92A3A001F00FDD3AB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 930993F82A3A001F00FDD3AB /* Preview Assets.xcassets */; };
 		930994032A3A001F00FDD3AB /* MementosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930994022A3A001F00FDD3AB /* MementosTests.swift */; };
@@ -25,6 +25,7 @@
 		935BFFF72A3B15A70016829B /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935BFFF62A3B15A70016829B /* Style.swift */; };
 		935BFFF92A3B59990016829B /* NewAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935BFFF82A3B59990016829B /* NewAlbumView.swift */; };
 		939239742A41F58700CD0DF4 /* ShowAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939239732A41F58700CD0DF4 /* ShowAlbumView.swift */; };
+		9396EA9C2A474C8300F8B527 /* Connectivity in Frameworks */ = {isa = PBXBuildFile; productRef = 9396EA9B2A474C8300F8B527 /* Connectivity */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +48,7 @@
 /* Begin PBXFileReference section */
 		930993EE2A3A001E00FDD3AB /* Mementos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mementos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		930993F12A3A001E00FDD3AB /* MementosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MementosApp.swift; sourceTree = "<group>"; };
-		930993F32A3A001E00FDD3AB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		930993F32A3A001E00FDD3AB /* IndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexView.swift; sourceTree = "<group>"; };
 		930993F52A3A001F00FDD3AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		930993F82A3A001F00FDD3AB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		930993FE2A3A001F00FDD3AB /* MementosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MementosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9396EA9C2A474C8300F8B527 /* Connectivity in Frameworks */,
 				935B00162A3B648A0016829B /* ImageMetadataUtil in Frameworks */,
 				935B001D2A3B764B0016829B /* Alamofire in Frameworks */,
 			);
@@ -122,7 +124,7 @@
 				935B00192A3B6FEC0016829B /* ImageModel.swift */,
 				935B001E2A3B76900016829B /* Client.swift */,
 				930993F12A3A001E00FDD3AB /* MementosApp.swift */,
-				930993F32A3A001E00FDD3AB /* ContentView.swift */,
+				930993F32A3A001E00FDD3AB /* IndexView.swift */,
 				939239732A41F58700CD0DF4 /* ShowAlbumView.swift */,
 				935BFFF82A3B59990016829B /* NewAlbumView.swift */,
 				935B00172A3B6F800016829B /* NewAlbumViewModel.swift */,
@@ -179,6 +181,7 @@
 			packageProductDependencies = (
 				935B00152A3B648A0016829B /* ImageMetadataUtil */,
 				935B001C2A3B764B0016829B /* Alamofire */,
+				9396EA9B2A474C8300F8B527 /* Connectivity */,
 			);
 			productName = Mementos;
 			productReference = 930993EE2A3A001E00FDD3AB /* Mementos.app */;
@@ -255,6 +258,7 @@
 			packageReferences = (
 				935B00142A3B648A0016829B /* XCRemoteSwiftPackageReference "ImageMetadataUtil" */,
 				935B001B2A3B764B0016829B /* XCRemoteSwiftPackageReference "Alamofire" */,
+				9396EA9A2A474C8300F8B527 /* XCRemoteSwiftPackageReference "connectivity" */,
 			);
 			productRefGroup = 930993EF2A3A001E00FDD3AB /* Products */;
 			projectDirPath = "";
@@ -302,7 +306,7 @@
 				939239742A41F58700CD0DF4 /* ShowAlbumView.swift in Sources */,
 				935B00182A3B6F800016829B /* NewAlbumViewModel.swift in Sources */,
 				935B00092A3B620E0016829B /* TransferableImageWithMetadata.swift in Sources */,
-				930993F42A3A001E00FDD3AB /* ContentView.swift in Sources */,
+				930993F42A3A001E00FDD3AB /* IndexView.swift in Sources */,
 				935BFFF92A3B59990016829B /* NewAlbumView.swift in Sources */,
 				930993F22A3A001E00FDD3AB /* MementosApp.swift in Sources */,
 				935BFFF72A3B15A70016829B /* Style.swift in Sources */,
@@ -657,6 +661,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		9396EA9A2A474C8300F8B527 /* XCRemoteSwiftPackageReference "connectivity" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rwbutler/connectivity";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -669,6 +681,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 935B001B2A3B764B0016829B /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		9396EA9B2A474C8300F8B527 /* Connectivity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9396EA9A2A474C8300F8B527 /* XCRemoteSwiftPackageReference "connectivity" */;
+			productName = Connectivity;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
