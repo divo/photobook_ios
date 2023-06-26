@@ -25,7 +25,6 @@
 		935BFFF72A3B15A70016829B /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935BFFF62A3B15A70016829B /* Style.swift */; };
 		935BFFF92A3B59990016829B /* NewAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935BFFF82A3B59990016829B /* NewAlbumView.swift */; };
 		939239742A41F58700CD0DF4 /* ShowAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939239732A41F58700CD0DF4 /* ShowAlbumView.swift */; };
-		9396EA9C2A474C8300F8B527 /* Connectivity in Frameworks */ = {isa = PBXBuildFile; productRef = 9396EA9B2A474C8300F8B527 /* Connectivity */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,7 +72,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9396EA9C2A474C8300F8B527 /* Connectivity in Frameworks */,
 				935B00162A3B648A0016829B /* ImageMetadataUtil in Frameworks */,
 				935B001D2A3B764B0016829B /* Alamofire in Frameworks */,
 			);
@@ -181,7 +179,6 @@
 			packageProductDependencies = (
 				935B00152A3B648A0016829B /* ImageMetadataUtil */,
 				935B001C2A3B764B0016829B /* Alamofire */,
-				9396EA9B2A474C8300F8B527 /* Connectivity */,
 			);
 			productName = Mementos;
 			productReference = 930993EE2A3A001E00FDD3AB /* Mementos.app */;
@@ -681,11 +678,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 935B001B2A3B764B0016829B /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		9396EA9B2A474C8300F8B527 /* Connectivity */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9396EA9A2A474C8300F8B527 /* XCRemoteSwiftPackageReference "connectivity" */;
-			productName = Connectivity;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
