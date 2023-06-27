@@ -29,48 +29,61 @@ struct NewAlbumView: View {
   
   @State var profileTitle: String = "Profile"
   @State var profileUrl = URL(string: Constants.baseURL + "/users/edit/")!
-  @State var pushProfile: Bool = false
+  @State var showLocationSheet: Bool = false
   
   var body: some View {
     VStack {
       titleField()
       if viewModel.images.isEmpty {
-        VStack {
-          Image(systemName: "paperclip")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 50, height: 50)
-            .padding(5)
-          
-          Text("Attach some photos to get started")
-          Text(" Your album must have at least " + String(minPhotos))
-        }.padding(20.0) //TODO: Style this thing
-          .foregroundColor(.white)
-          .background(Style.secondaryColor()) // Left here, need more colors
-          .border(Style.secondaryColor(), width: 2)
-          .cornerRadius(/*@START_MENU_TOKEN@*/6.0/*@END_MENU_TOKEN@*/)
-          .shadow(color: .gray, radius: 2, x: 0, y: 2)
-        
+        Spacer(minLength: 50)
+        Button {
+          if readWriteStatus != .authorized && readWriteStatus != .limited {
+            // TODO: Test this logic makes sense and we can request again!
+            requestAccess()
+          } else {
+            self.presentPicker = true
+          }
+        } label: {
+          VStack {
+            Image(systemName: "paperclip")
+              .resizable()
+              .aspectRatio(contentMode: .fit)
+              .frame(width: 50, height: 50)
+              .padding(5)
+            
+            Text("Attach some photos to get started")
+            Text(" Your album must have at least \(minPhotos) images")
+          }.padding(20.0) //TODO: Style this thing
+            .foregroundColor(Style.primary9())
+            .background(Style.primary6()) // Left here, need more colors
+            .cornerRadius(/*@START_MENU_TOKEN@*/6.0/*@END_MENU_TOKEN@*/)
+        }
       }
       photoList()
-      HStack {
-        attachButton()
-        createAlbumButton().padding(.horizontal)
-      }
       showNavigationLink()
-      NavigationLink(destination: WebViewContainer(url: $profileUrl, title: $profileTitle), isActive: $pushProfile) { EmptyView() }
-
+        .alert(viewModel.alertMessage, isPresented: $showingAlert) {
+          Button("OK", role: .cancel) { }
+        }
+      
     }.navigationTitle("Create Album").onAppear(perform: onAppear)
       .photosPicker(isPresented: self.$presentPicker, selection: $viewModel.imageSelections, maxSelectionCount: 150, matching: .images, photoLibrary: .shared())
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {
-            self.pushProfile = true
+            createAlbum()
           } label: {
-            Image(systemName: "person.crop.circle")
+            Text("Next")
           }
         }
-    }
+      }
+      .floatingActionButton(color: .blue, image: Image("attach")) {
+        if readWriteStatus != .authorized && readWriteStatus != .limited {
+          // TODO: Test this logic makes sense and we can request again!
+          requestAccess()
+        } else {
+          self.presentPicker = true
+        }
+      }
   }
   
   func requestAccess() {
@@ -131,33 +144,26 @@ struct NewAlbumView: View {
       }
     }
   }
-
-  func createAlbumButton() -> some View {
-    Button("Create Album") {
-      switch isValid() {
-      case .failure(let error):
-        self.viewModel.alertMessage = error.localizedDescription
-        self.showingAlert = true
-      case.success(_):
-        self.client.create_album(csrf: self.viewModel.csrfToken!, title: self.viewModel.title, images: self.viewModel.images) { result in
-          switch result {
-          case .success(let album):
-            print("Album created: " + album.id)
-            self.viewModel.albumURL = URL(string: Constants.baseURL + "/photo_albums/\(album.id)")!
-            self.pushShow = true
-          case .failure(let error):
-            print(error)
-          }
+  
+  func createAlbum() {
+    switch isValid() {
+    case .failure(let error):
+      self.viewModel.alertMessage = error.localizedDescription
+      self.showingAlert = true
+    case.success(_):
+      // TODO: Need to show a spinner, or update the next view with the album id after it comes back
+      self.client.create_album(csrf: self.viewModel.csrfToken!, title: self.viewModel.title, images: self.viewModel.images) { result in
+        switch result {
+        case .success(let album):
+          print("Album created: " + album.id)
+          self.viewModel.albumURL = URL(string: Constants.baseURL + "/photo_albums/\(album.id)")!
+          self.pushShow = true
+        case .failure(let error):
+          // TODO: Display an error
+          print(error)
         }
       }
-    }.padding(20)
-      .frame(width: 200.0)
-      .foregroundColor(/*@START_MENU_TOKEN@*/.white/*@END_MENU_TOKEN@*/)
-      .background(Style.secondaryColor())
-      .cornerRadius(/*@START_MENU_TOKEN@*/6.0/*@END_MENU_TOKEN@*/)
-      .alert(viewModel.alertMessage, isPresented: $showingAlert) {
-        Button("OK", role: .cancel) { }
-      }
+    }
   }
   
   func showNavigationLink() -> some View {
@@ -176,7 +182,7 @@ struct NewAlbumView: View {
       self.viewModel.csrfToken = csrfToken
     }
   }
-   
+  
   func isValid() -> Result<String, ValidationError> {
     if viewModel.title.isEmpty {
       return Result.failure(.title)
@@ -188,7 +194,7 @@ struct NewAlbumView: View {
       return Result.success("")
     }
   }
-
+  
   func upload(image: ImageModel) {
     switch image.status {
     case .waiting:
