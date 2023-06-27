@@ -74,13 +74,15 @@ struct IndexView: View {
           
           webView.onAppear {
             webView.reload()
-          }
+          }.edgesIgnoringSafeArea(.all)
+
         }
        
         NavigationLink(destination: NewAlbumView(rootIsActive: self.$viewModel.pushNew), isActive: self.$viewModel.pushNew) { EmptyView() }.isDetailLink(false)
         NavigationLink(destination: WebViewContainer(url: $viewModel.showUrl, title: $viewModel.childTitle), isActive: $viewModel.pushShow) { EmptyView() }
         NavigationLink(destination: WebViewContainer(url: $viewModel.profileUrl, title: $viewModel.profileTitle), isActive: $viewModel.pushProfile) { EmptyView() }
       }.navigationTitle("Mementos")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
           ToolbarItem(placement: .navigationBarTrailing) {
             Button {
@@ -89,7 +91,7 @@ struct IndexView: View {
               Image(systemName: "person.crop.circle")
             }
           }
-        }.edgesIgnoringSafeArea(.bottom)
+        }
     }
   }
   

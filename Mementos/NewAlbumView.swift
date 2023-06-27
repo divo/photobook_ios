@@ -83,7 +83,7 @@ struct NewAlbumView: View {
         } else {
           self.presentPicker = true
         }
-      }
+      }.background(Style.background())
   }
   
   func requestAccess() {

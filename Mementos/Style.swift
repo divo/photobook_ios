@@ -26,4 +26,8 @@ struct Style {
   static func primary6() -> Color {
     return Color(red: 112 / 255, green: 105 / 255, blue: 250 / 255)
   }
+
+  static func background() -> Color {
+    return Color(red: 240 / 255, green: 244 / 255, blue: 248 / 255)
+  }
 }
