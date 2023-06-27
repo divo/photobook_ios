@@ -21,7 +21,7 @@ class IndexViewModel: ObservableObject {
   
   let monitor = NWPathMonitor()
   let queue = DispatchQueue(label: "Monitor")
-  @Published private(set) var connected: Bool = false
+  @Published private(set) var connected: Bool = true
   
   init() {
     checkConnection()
