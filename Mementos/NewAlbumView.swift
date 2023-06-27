@@ -138,6 +138,22 @@ struct NewAlbumView: View {
             .aspectRatio(contentMode: .fit)
             .frame(height: 250)
             .clipped()
+          if image.gpsDictionary() == nil {
+            VStack {
+                Image(systemName: "location.slash").foregroundColor(.red)
+                Text("Add location data").foregroundColor(.black)
+              }
+//            Button {
+//              self.showLocationSheet = true
+//            } label: {
+//              VStack {
+//                Image(systemName: "location.slash").foregroundColor(.red)
+//                Text("Add location data").foregroundColor(.black)
+//              }
+//            .sheet(isPresented: $showLocationSheet) {
+//              LocationSearchView()
+//            }
+          }
           ProgressView(value: image.uploadProgress)
         }
         Spacer()
