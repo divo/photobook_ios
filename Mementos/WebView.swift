@@ -37,7 +37,7 @@ struct WebViewContainer: View {
             Image(systemName: "person.crop.circle")
           }
         }
-      }
+      }.edgesIgnoringSafeArea(.bottom)
   }
   
 }

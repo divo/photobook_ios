@@ -34,7 +34,7 @@ struct ShowAlbumView: View {
             Image(systemName: "person.crop.circle")
           }
         }
-      }
+      }.edgesIgnoringSafeArea(.bottom)
   }
   
   var btnBack : some View { Button(action: {

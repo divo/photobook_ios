@@ -89,7 +89,7 @@ struct IndexView: View {
               Image(systemName: "person.crop.circle")
             }
           }
-      }
+        }.edgesIgnoringSafeArea(.bottom)
     }
   }
   
