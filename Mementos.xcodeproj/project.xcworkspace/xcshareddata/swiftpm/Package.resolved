@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "connectivity",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/rwbutler/connectivity",
+      "state" : {
+        "revision" : "d5ba3725634e2afd6c8fc1029cc47c885394ff0b",
+        "version" : "6.0.0"
+      }
+    },
+    {
       "identity" : "imagemetadatautil",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/divo/ImageMetadataUtil.git",

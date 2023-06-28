@@ -20,5 +20,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1623CF3B-2BEC-41E2-99C3-1E801590F3DF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mementos/Client.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "direct_upload(csrf:imageModel:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1623CF3B-2BEC-41E2-99C3-1E801590F3DF - deecb8ce39a7053d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (__C.NSProgress) -&gt; () in closure #1 (Alamofire.DataResponse&lt;Mementos.DirectUploadResponse, Alamofire.AFError&gt;) -&gt; () in Mementos.Client.direct_upload(csrf: Swift.String, imageModel: Mementos.ImageModel, completion: (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Mementos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stevendiviney/code/photobook_ios/Mementos/Client.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "580">
+               </Location>
+               <Location
+                  uuid = "1623CF3B-2BEC-41E2-99C3-1E801590F3DF - deecb8ce39a7053d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (__C.NSProgress) -&gt; () in closure #1 (Alamofire.DataResponse&lt;Mementos.DirectUploadResponse, Alamofire.AFError&gt;) -&gt; () in Mementos.Client.direct_upload(csrf: Swift.String, imageModel: Mementos.ImageModel, completion: (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Mementos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stevendiviney/code/photobook_ios/Mementos/Client.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "584">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
