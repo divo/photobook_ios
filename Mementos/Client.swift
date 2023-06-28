@@ -43,18 +43,20 @@ class Client {
       let imageData = try imageModel.jpegData()
       let params = imageModel.to_json(data: imageData)
       AF.request(direct_upload_url, method: .post, parameters: params, headers: headers)
-        .uploadProgress { progress in
-          imageModel.uploadProgress = progress.fractionCompleted
-        }.responseDecodable(of: DirectUploadResponse.self) { response in
+        .responseDecodable(of: DirectUploadResponse.self) { response in
         switch response.result {
         case .success(let body):
           let signed_id = body.signed_id
           AF.upload(imageData, to: body.direct_upload.url, method: .put, headers: HTTPHeaders(body.direct_upload.headers)).response { response in
+            print("Upload success")
             completion(.success(signed_id))
+          }.uploadProgress { progress in
+            print("Upload \(imageModel.id) at \(progress.fractionCompleted)")
+            imageModel.uploadProgress = progress.fractionCompleted
           }
         case .failure(let error):
-          completion(.failure(error))
           print(error.localizedDescription)
+          completion(.failure(error))
         }
       }
     } catch let error {

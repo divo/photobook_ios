@@ -32,9 +32,23 @@ struct NewAlbumView: View {
   @State var profileUrl = URL(string: Constants.baseURL + "/users/edit/")!
   @State var showLocationSheet: Bool = false
   
+  @State var totalUploads = 0
+  @State var completedUploads = 0
+  
   var body: some View {
     VStack {
       titleField()
+      if totalUploads != 0 {
+        HStack {
+          if totalUploads != completedUploads {
+            ProgressView().padding(.trailing, 1 )
+          } else {
+            Image(systemName: "checkmark.circle")
+          }
+          Text("\(completedUploads) of \(totalUploads) images uploaded").font(.subheadline)
+        }.animation(.default, value: totalUploads != completedUploads)
+      }
+      
       if viewModel.images.isEmpty {
         Spacer(minLength: 50)
         Button {
@@ -159,7 +173,6 @@ struct NewAlbumView: View {
 //              LocationSearchView()
 //            }
           }
-          ProgressView(value: image.uploadProgress)
         }
         Spacer()
       }
@@ -219,14 +232,17 @@ struct NewAlbumView: View {
   func upload(image: ImageModel) {
     switch image.status {
     case .waiting:
+      self.totalUploads += 1
       image.status = .uploading
       client.direct_upload(csrf: viewModel.csrfToken!, imageModel: image) { response in
         switch response {
         case .success(let signed_id):
           image.status = .uploaded(signed_id)
+          self.completedUploads += 1
         case .failure(_):
           image.status = .failed
         }
+        image.objectWillChange.send()
       }
     default:
       break
