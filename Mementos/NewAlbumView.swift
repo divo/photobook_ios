@@ -26,6 +26,7 @@ struct NewAlbumView: View {
   @State var pushShow = false
   @State var presentPicker = false
   @State var showingAlert = false
+  @FocusState private var titleIsFocused: Bool
   
   @State var profileTitle: String = "Profile"
   @State var profileUrl = URL(string: Constants.baseURL + "/users/edit/")!
@@ -41,6 +42,7 @@ struct NewAlbumView: View {
             // TODO: Test this logic makes sense and we can request again!
             requestAccess()
           } else {
+            self.titleIsFocused = true
             self.presentPicker = true
           }
         } label: {
@@ -81,9 +83,11 @@ struct NewAlbumView: View {
           // TODO: Test this logic makes sense and we can request again!
           requestAccess()
         } else {
+          self.titleIsFocused = false
           self.presentPicker = true
         }
       }.background(Style.background())
+      .scrollDismissesKeyboard(.immediately)
   }
   
   func requestAccess() {
@@ -126,6 +130,7 @@ struct NewAlbumView: View {
           .foregroundColor(.black),
         alignment: .bottom
       ).padding(20)
+      .focused($titleIsFocused)
   }
   
   func photoList() -> some View {
