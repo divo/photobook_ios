@@ -14,16 +14,16 @@ struct WebViewContainer: View {
   let webView: WebView
   @Binding var title: String
   @State var profileTitle: String = "Profile"
-  @State var profileUrl = URL(string: Constants.baseURL + "/users/edit/")!
+  let profileUrl = URL(string: Constants.baseURL + "/users/edit/")!
   @State var pushProfile: Bool = false
   
-  init(url: Binding<URL>, navigationActions: [String]? = nil, navigationCallback: ((String, String, [URLQueryItem]?) -> ())? = nil, title: Binding<String>) {
+  init(url: URL, navigationActions: [String]? = nil, navigationCallback: ((String, String, [URLQueryItem]?) -> ())? = nil, title: Binding<String>) {
     self._title = title
     self.webView = WebView(url: url, navigationActions: navigationActions, navigationCallback: navigationCallback)
   }
   
   var body: some View {
-    NavigationLink(destination: WebViewContainer(url: $profileUrl, title: $profileTitle), isActive: $pushProfile) { EmptyView() }
+    NavigationLink(destination: WebViewContainer(url: profileUrl, title: $profileTitle), isActive: $pushProfile) { EmptyView() }
     webView
       .toolbar {
         ToolbarItem(placement: .principal) { // <3>
@@ -43,29 +43,30 @@ struct WebViewContainer: View {
 }
 
 struct WebView: UIViewRepresentable{
-  @Binding var url: URL
+  let url: URL
   let webDataStore = WKWebsiteDataStore.default()
   let configuration: WKWebViewConfiguration
   let webView: WKWebView
   let dataModel: WebViewDataModel
   
-  init(url: Binding<URL>, navigationActions: [String]? = nil, navigationCallback: ((String, String, [URLQueryItem]?) -> ())? = nil) {
-    self._url = url
+  init(url: URL, navigationActions: [String]? = nil, navigationCallback: ((String, String, [URLQueryItem]?) -> ())? = nil) {
+    self.url = url
     self.configuration = WKWebViewConfiguration()
     configuration.websiteDataStore = webDataStore
     self.webView = WKWebView(frame: .zero, configuration: configuration)
     self.dataModel = WebViewDataModel(navigationActions: navigationActions, navigationCallback: navigationCallback)
     
     webView.navigationDelegate = dataModel
+    webView.customUserAgent = "Mementos-iOS"
     dataModel.webView = self
   }
   
-  func makeUIView(context: Context) -> some UIView {
-    webView.customUserAgent = "Mementos-iOS"
+  func makeUIView(context: Context) -> WKWebView {
     return webView
   }
   
   func updateUIView(_ uiView: UIViewType, context: Context) {
+//    print("WebView \(ObjectIdentifier(webView)) update called: \((uiView as? WKWebView)?.url)")
     let request = URLRequest(url: url)
     (uiView as? WKWebView)?.load(request)
   }
@@ -99,6 +100,7 @@ class WebViewDataModel: NSObject, ObservableObject, WKNavigationDelegate{
   }
   
   func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+//    print("WebView \(ObjectIdentifier(webView)) navigation: \(navigationAction.request.url)")
     guard let url = navigationAction.request.url else {
       decisionHandler(.cancel)
       return

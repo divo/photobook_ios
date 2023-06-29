@@ -58,7 +58,7 @@ struct IndexView: View {
           Text("A internet connection is required")
             .bold()
         } else {
-          let webView = WebView(url: $viewModel.url, navigationActions: ["show_album", "new_album"]) { action, destination, queryItems in
+          let webView = WebView(url: viewModel.url, navigationActions: ["show_album", "new_album"]) { action, destination, queryItems in
             if action == "show_album" {
               if let queryItems = queryItems,
                  let titleParam = queryItems.first(where: { item in item.name == "name" }), // Why in gods name did I call the title "name"
@@ -75,12 +75,11 @@ struct IndexView: View {
           webView.onAppear {
             webView.reload()
           }.edgesIgnoringSafeArea(.all)
-
         }
        
         NavigationLink(destination: NewAlbumView(rootIsActive: self.$viewModel.pushNew), isActive: self.$viewModel.pushNew) { EmptyView() }.isDetailLink(false)
-        NavigationLink(destination: WebViewContainer(url: $viewModel.showUrl, title: $viewModel.childTitle), isActive: $viewModel.pushShow) { EmptyView() }
-        NavigationLink(destination: WebViewContainer(url: $viewModel.profileUrl, title: $viewModel.profileTitle), isActive: $viewModel.pushProfile) { EmptyView() }
+        NavigationLink(destination: WebViewContainer(url: viewModel.showUrl, title: $viewModel.childTitle), isActive: $viewModel.pushShow) { EmptyView() }
+        NavigationLink(destination: WebViewContainer(url: viewModel.profileUrl, title: $viewModel.profileTitle), isActive: $viewModel.pushProfile) { EmptyView() }
       }.navigationTitle("Mementos")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

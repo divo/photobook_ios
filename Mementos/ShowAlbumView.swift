@@ -13,16 +13,16 @@ struct ShowAlbumView: View {
   @Binding var shouldPopToRootView : Bool
   
   @State var profileTitle: String = "Profile"
-  @State var profileUrl = URL(string: Constants.baseURL + "/users/edit/")!
+  let profileUrl = URL(string: Constants.baseURL + "/users/edit/")!
   @State var pushProfile: Bool = false
   
-  init(shouldPopToRootView: Binding<Bool>, url: Binding<URL>) {
+  init(shouldPopToRootView: Binding<Bool>, url: URL) {
     self._shouldPopToRootView = shouldPopToRootView
     self.webView = WebView(url: url)
   }
   
   var body: some View {
-    NavigationLink(destination: WebViewContainer(url: $profileUrl, title: $profileTitle), isActive: $pushProfile) { EmptyView() }
+    NavigationLink(destination: WebViewContainer(url: profileUrl, title: $profileTitle), isActive: $pushProfile) { EmptyView() }
     webView
       .navigationBarBackButtonHidden(true)
       .navigationBarItems(leading: btnBack)
