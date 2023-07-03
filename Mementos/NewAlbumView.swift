@@ -195,6 +195,10 @@ struct NewAlbumView: View {
         case .failure(let error):
           //TODO: Show an error
           self.pushShow = false
+          DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.viewModel.alertMessage = "Something went wrong, please try again: \(error.localizedDescription)"
+            self.showingAlert = true
+          }
           print(error)
         }
       }
