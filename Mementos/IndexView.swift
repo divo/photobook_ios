@@ -74,7 +74,7 @@ struct IndexView: View {
           
           webView.onAppear {
             webView.reload()
-          }.edgesIgnoringSafeArea(.all)
+          }.edgesIgnoringSafeArea(.bottom)
         }
        
         NavigationLink(destination: NewAlbumView(rootIsActive: self.$viewModel.pushNew), isActive: self.$viewModel.pushNew) { EmptyView() }.isDetailLink(false)
