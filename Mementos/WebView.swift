@@ -58,6 +58,9 @@ struct WebView: UIViewRepresentable{
     
     webView.navigationDelegate = dataModel
     webView.customUserAgent = "Mementos-iOS"
+    if #available(macOS 13.3, iOS 16.4, tvOS 16.4, *) {
+        webView.isInspectable = true
+    }
     dataModel.webView = self
   }
   
