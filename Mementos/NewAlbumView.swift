@@ -180,6 +180,7 @@ struct NewAlbumView: View {
   }
   
   func createAlbum() {
+    self.pushShow = true
     switch isValid() {
     case .failure(let error):
       self.viewModel.alertMessage = error.localizedDescription
@@ -191,9 +192,9 @@ struct NewAlbumView: View {
         case .success(let album):
           print("Album created: " + album.id)
           self.viewModel.albumURL = URL(string: Constants.baseURL + "/photo_albums/\(album.id)")!
-          self.pushShow = true
         case .failure(let error):
-          // TODO: Display an error
+          //TODO: Show an error
+          self.pushShow = false
           print(error)
         }
       }
