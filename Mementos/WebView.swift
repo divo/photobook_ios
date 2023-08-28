@@ -54,9 +54,11 @@ struct WebView: UIViewRepresentable{
     self.configuration = WKWebViewConfiguration()
     configuration.websiteDataStore = webDataStore
     self.webView = WKWebView(frame: .zero, configuration: configuration)
+    self.webView.scrollView.showsHorizontalScrollIndicator = false
     self.dataModel = WebViewDataModel(navigationActions: navigationActions, navigationCallback: navigationCallback)
     
     webView.navigationDelegate = dataModel
+    webView.scrollView.delegate = ScrollViewDelegate()
     webView.customUserAgent = "Mementos-iOS"
     if #available(macOS 13.3, iOS 16.4, tvOS 16.4, *) {
         webView.isInspectable = true
@@ -79,9 +81,20 @@ struct WebView: UIViewRepresentable{
   }
 }
 
+class ScrollViewDelegate: NSObject, UIScrollViewDelegate {
+  func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+    scrollView.pinchGestureRecognizer?.isEnabled = false
+  }
+  
+  func scrollViewDidZoom(_ scrollView: UIScrollView) {
+    scrollView.minimumZoomScale = scrollView.zoomScale
+    scrollView.maximumZoomScale = scrollView.zoomScale
+  }
+}
+
 // TODO: If this remains the UIDelegate it needs to be renamed
 //class WebViewDataModel: ObservableObject {
-class WebViewDataModel: NSObject, ObservableObject, WKNavigationDelegate{
+class WebViewDataModel: NSObject, ObservableObject, WKNavigationDelegate {
   @Published var railsCookie: HTTPCookie?
   let navigationActions: [String]?
   let navigationCallback: ((String, String, [URLQueryItem]?) -> ())?
