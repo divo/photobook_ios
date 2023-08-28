@@ -53,12 +53,22 @@ struct WebView: UIViewRepresentable{
     self.url = url
     self.configuration = WKWebViewConfiguration()
     configuration.websiteDataStore = webDataStore
+    let scrollDisable: String = "var meta = document.createElement('meta');" +
+        "meta.name = 'viewport';" +
+        "meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';" +
+        "var head = document.getElementsByTagName('head')[0];" +
+        "head.appendChild(meta);"
+
+    let script: WKUserScript = WKUserScript(source: scrollDisable, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+    let userContentController: WKUserContentController = WKUserContentController()
+    self.configuration.userContentController = userContentController
+    userContentController.addUserScript(script)
+    
     self.webView = WKWebView(frame: .zero, configuration: configuration)
     self.webView.scrollView.showsHorizontalScrollIndicator = false
     self.dataModel = WebViewDataModel(navigationActions: navigationActions, navigationCallback: navigationCallback)
     
     webView.navigationDelegate = dataModel
-    webView.scrollView.delegate = ScrollViewDelegate()
     webView.customUserAgent = "Mementos-iOS"
     if #available(macOS 13.3, iOS 16.4, tvOS 16.4, *) {
         webView.isInspectable = true
@@ -78,17 +88,6 @@ struct WebView: UIViewRepresentable{
   
   func reload() {
     webView.reload()
-  }
-}
-
-class ScrollViewDelegate: NSObject, UIScrollViewDelegate {
-  func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
-    scrollView.pinchGestureRecognizer?.isEnabled = false
-  }
-  
-  func scrollViewDidZoom(_ scrollView: UIScrollView) {
-    scrollView.minimumZoomScale = scrollView.zoomScale
-    scrollView.maximumZoomScale = scrollView.zoomScale
   }
 }
 
