@@ -26,6 +26,7 @@
 		935BFFF72A3B15A70016829B /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935BFFF62A3B15A70016829B /* Style.swift */; };
 		935BFFF92A3B59990016829B /* NewAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935BFFF82A3B59990016829B /* NewAlbumView.swift */; };
 		935F4BC32A49DFA500A54E5A /* LocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F4BC22A49DFA500A54E5A /* LocationSearchView.swift */; };
+		9366BF4D2A9D2D76001DEB6E /* IndexViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9366BF4C2A9D2D76001DEB6E /* IndexViewModel.swift */; };
 		939239742A41F58700CD0DF4 /* ShowAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939239732A41F58700CD0DF4 /* ShowAlbumView.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,7 @@
 		935BFFF62A3B15A70016829B /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		935BFFF82A3B59990016829B /* NewAlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAlbumView.swift; sourceTree = "<group>"; };
 		935F4BC22A49DFA500A54E5A /* LocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchView.swift; sourceTree = "<group>"; };
+		9366BF4C2A9D2D76001DEB6E /* IndexViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexViewModel.swift; sourceTree = "<group>"; };
 		939239732A41F58700CD0DF4 /* ShowAlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlbumView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,6 +126,7 @@
 			children = (
 				935B00202A3B786D0016829B /* Info.plist */,
 				934E6D1F2A42F95F00EF6770 /* FloatingButton.swift */,
+				9366BF4C2A9D2D76001DEB6E /* IndexViewModel.swift */,
 				935B00192A3B6FEC0016829B /* ImageModel.swift */,
 				935B001E2A3B76900016829B /* Client.swift */,
 				930993F12A3A001E00FDD3AB /* MementosApp.swift */,
@@ -315,6 +318,7 @@
 				935BFFF92A3B59990016829B /* NewAlbumView.swift in Sources */,
 				930993F22A3A001E00FDD3AB /* MementosApp.swift in Sources */,
 				935BFFF72A3B15A70016829B /* Style.swift in Sources */,
+				9366BF4D2A9D2D76001DEB6E /* IndexViewModel.swift in Sources */,
 				935B001A2A3B6FEC0016829B /* ImageModel.swift in Sources */,
 				935B001F2A3B76900016829B /* Client.swift in Sources */,
 				934E6D202A42F95F00EF6770 /* FloatingButton.swift in Sources */,
