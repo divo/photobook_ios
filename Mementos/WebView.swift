@@ -152,8 +152,7 @@ class WebViewDataModel: NSObject, ObservableObject, WKNavigationDelegate {
   }
   
   func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-    print("WebView \(ObjectIdentifier(webView)) navigation: \(navigationAction.request.url)")
-    print("WebView \(ObjectIdentifier(webView)) navigation: \(navigationAction.navigationType)")
+//    print("WebView \(ObjectIdentifier(webView)) navigation: \(navigationAction.request.url)")
     guard let url = navigationAction.request.url else {
       decisionHandler(.cancel)
       return
