@@ -21,8 +21,13 @@ struct ShowAlbumView: View {
     self.webView = WebView(url: url)
   }
   
+  func updateURL(_ url: URL) {
+    webView.updateURL(url)
+  }
+  
   var body: some View {
     NavigationLink(destination: WebViewContainer(url: profileUrl, title: $profileTitle), isActive: $pushProfile) { EmptyView() }
+
     webView
       .navigationBarBackButtonHidden(true)
       .navigationBarItems(leading: btnBack)

@@ -9,12 +9,7 @@ import SwiftUI
 import Network
 
 class IndexViewModel: ObservableObject {
-  @Published var url = URL(string: Constants.baseURL + "/photo_albums")! {
-    didSet {
-      // Set a breakpoint here, although it's more than likely
-      // ordinary UI updates causing the view to redraw
-    }
-  }
+  @Published var url = URL(string: Constants.baseURL + "/photo_albums")!
   @Published var showUrl = URL(string: Constants.baseURL)!
   @Published var profileUrl = URL(string: Constants.baseURL + "/users/edit/")!
   // TODO: Consilidate bools into one string

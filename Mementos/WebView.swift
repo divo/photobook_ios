@@ -42,17 +42,44 @@ struct WebViewContainer: View {
   
 }
 
+// Tiny state machine that allows a URL to be rendered once
+// I can't reload the WebView in response to layout updates, but I need some way
+// to tell the webView to reload sometimes. When a updateUIView is called in the
+// webview checks if it's currentURL matches the oldURL
+// If they match it discards the update.
+class WebViewModel {
+  var currentURL: URL
+  private var oldURL: URL?
+  
+  init(url: URL) {
+    self.currentURL = url
+    self.oldURL = nil
+  }
+  
+  // Called inside updateUIView when it determines re-render is needed
+  func render() -> URL {
+    oldURL = currentURL
+    return currentURL
+  }
+  
+  // Check if the URL shown is the current one or if the page needs to be loaded
+  func needsRefresh() -> Bool {
+    return currentURL != oldURL
+  }
+}
+
 struct WebView: UIViewRepresentable{
-  let url: URL
+  let viewModel: WebViewModel
   let webDataStore = WKWebsiteDataStore.default()
   let configuration: WKWebViewConfiguration
   let webView: WKWebView
   let dataModel: WebViewDataModel
   
   init(url: URL, navigationActions: [String]? = nil, navigationCallback: ((String, String, [URLQueryItem]?) -> ())? = nil) {
-    self.url = url
+    self.viewModel = WebViewModel(url: url)
     self.configuration = WKWebViewConfiguration()
     configuration.websiteDataStore = webDataStore
+    
     let scrollDisable: String = "var meta = document.createElement('meta');" +
         "meta.name = 'viewport';" +
         "meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';" +
@@ -77,13 +104,23 @@ struct WebView: UIViewRepresentable{
   }
   
   func makeUIView(context: Context) -> WKWebView {
+    let request = URLRequest(url: viewModel.currentURL)
+    webView.load(request)
     return webView
   }
   
   func updateUIView(_ uiView: UIViewType, context: Context) {
 //    print("WebView \(ObjectIdentifier(webView)) update called: \((uiView as? WKWebView)?.url)")
+    if viewModel.needsRefresh() {
+      let request = URLRequest(url: viewModel.render())
+      (uiView as? WKWebView)?.load(request)
+    }
+  }
+  
+  func updateURL(_ url: URL) {
+    self.viewModel.currentURL = url
     let request = URLRequest(url: url)
-    (uiView as? WKWebView)?.load(request)
+    webView.load(request)
   }
   
   func reload() {
@@ -106,7 +143,7 @@ class WebViewDataModel: NSObject, ObservableObject, WKNavigationDelegate {
   
   func fetch_rails_cookie() {
     webView.webDataStore.httpCookieStore.getAllCookies { cookies in
-      AF.session.configuration.httpCookieStorage?.setCookies(cookies, for: self.webView.url, mainDocumentURL: nil)
+      AF.session.configuration.httpCookieStorage?.setCookies(cookies, for: self.webView.viewModel.currentURL, mainDocumentURL: nil)
     }
   }
   
@@ -115,7 +152,8 @@ class WebViewDataModel: NSObject, ObservableObject, WKNavigationDelegate {
   }
   
   func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-//    print("WebView \(ObjectIdentifier(webView)) navigation: \(navigationAction.request.url)")
+    print("WebView \(ObjectIdentifier(webView)) navigation: \(navigationAction.request.url)")
+    print("WebView \(ObjectIdentifier(webView)) navigation: \(navigationAction.navigationType)")
     guard let url = navigationAction.request.url else {
       decisionHandler(.cancel)
       return
