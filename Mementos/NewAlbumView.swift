@@ -18,7 +18,7 @@ struct NewAlbumView: View {
   let minPhotos = 30
 #endif
   
-  @ObservedObject var viewModel = NewAlbumViewModel()
+  @StateObject var viewModel = NewAlbumViewModel()
   @Binding var rootIsActive: Bool
   
   // TODO: Add into view model
