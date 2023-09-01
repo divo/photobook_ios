@@ -15,7 +15,7 @@ class NewAlbumViewModel: ObservableObject {
   var alertMessage = ""
   var imageAddedCallback: ((ImageModel) -> ())? = nil
   @Published var albumURL = Bundle.main.url(forResource: "loading", withExtension: "html")!
-  var showAlbumView: ShowAlbumView?
+  @Published var albumTitle = ""
   @Published var images: [ImageModel] = [] // Upload images as they are appended here
   @Published var imageSelections: [PhotosPickerItem] = [] {
     didSet {

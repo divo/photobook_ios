@@ -193,7 +193,7 @@ struct NewAlbumView: View {
           print("Album created: " + album.id)
           let albumUrl = URL(string: Constants.baseURL + "/photo_albums/\(album.id)")!
           viewModel.albumURL = albumUrl // Do I even need this in the view model anymore?
-          viewModel.showAlbumView?.updateURL(albumUrl)
+          viewModel.albumTitle = album.name
         case .failure(let error):
           //TODO: Show an error
           self.pushShow = false
@@ -208,11 +208,8 @@ struct NewAlbumView: View {
   }
   
   func showNavigationLink() -> some View {
-    let showAlbumView = ShowAlbumView(shouldPopToRootView: self.$rootIsActive, url: viewModel.albumURL)
-    viewModel.showAlbumView = showAlbumView
-    return NavigationLink(destination: showAlbumView, isActive: self.$pushShow) { EmptyView() }
+    return NavigationLink(destination: ShowAlbumView(shouldPopToRootView: self.$rootIsActive, url: $viewModel.albumURL, title: $viewModel.title), isActive: self.$pushShow) { EmptyView() }
       .isDetailLink(false)
-      .navigationTitle("New Album")
     
   }
   
