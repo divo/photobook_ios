@@ -9,7 +9,11 @@ import SwiftUI
 import Network
 
 struct IndexView: View {
-  @ObservedObject var viewModel = IndexViewModel()
+  @StateObject var viewModel: IndexViewModel = IndexViewModel()
+//  @StateObject var webViewModel: WebViewModel = WebViewModel()
+  @StateObject var webViewModel: WebViewModel = WebViewModel()
+//  let showAlbumView: WebViewContainer = WebViewContainer(url: Constants.renameMe)
+  
 
   var body: some View {
     NavigationView {
@@ -23,28 +27,16 @@ struct IndexView: View {
           Text("A internet connection is required")
             .bold()
         } else {
-          let webView = WebView(url: viewModel.url, navigationActions: ["show_album", "new_album"]) { action, destination, queryItems in
-            if action == "show_album" {
-              if let queryItems = queryItems,
-                 let titleParam = queryItems.first(where: { item in item.name == "name" }), // Why in gods name did I call the title "name"
-                 let title = titleParam.value {
-                self.viewModel.childTitle = title
-              }
-              viewModel.showUrl = URL(string: Constants.baseURL + "/photo_albums/\(destination)")!
-              viewModel.pushShow = true
-            } else if action == "new_album" {
-              viewModel.pushNew = true
-            }
-          }
-          
-          webView.onAppear {
-            webView.reload()
-          }.edgesIgnoringSafeArea(.bottom)
+          WebView(webView: webViewModel.webView)
+            .onAppear {
+              webViewModel.url = viewModel.url
+              setActionHander()
+            }.edgesIgnoringSafeArea(.bottom)
         }
        
-        NavigationLink(destination: NewAlbumView(rootIsActive: self.$viewModel.pushNew), isActive: self.$viewModel.pushNew) { EmptyView() }.isDetailLink(false)
-        NavigationLink(destination: WebViewContainer(url: viewModel.showUrl, title: $viewModel.childTitle), isActive: $viewModel.pushShow) { EmptyView() }
-        NavigationLink(destination: WebViewContainer(url: viewModel.profileUrl, title: $viewModel.profileTitle), isActive: $viewModel.pushProfile) { EmptyView() }
+//        NavigationLink(destination: NewAlbumView(rootIsActive: self.$viewModel.pushNew), isActive: self.$viewModel.pushNew) { EmptyView() }.isDetailLink(false)
+//        NavigationLink(destination: self.showAlbumView, isActive: $viewModel.pushShow) { EmptyView() }
+//        NavigationLink(destination: WebViewContainer(url: viewModel.profileUrl, title: $viewModel.profileTitle), isActive: $viewModel.pushProfile) { EmptyView() }
       }.navigationTitle("Mementos")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -59,7 +51,21 @@ struct IndexView: View {
     }
   }
   
-  
+  func setActionHander() {
+    webViewModel.setActionHandler(navigationActions: ["show_album", "new_album"]) { action, destination, queryItems in
+      if action == "show_album" {
+        if let queryItems = queryItems,
+           let titleParam = queryItems.first(where: { item in item.name == "name" }), // Why in gods name did I call the title "name"
+           let title = titleParam.value {
+          self.viewModel.childTitle = title // TODO: Need to wire this through somehow
+        }
+//        self.showAlbumView.loadURL(URL(string: Constants.baseURL + "/photo_albums/\(destination)")!)
+        self.viewModel.pushShow = true
+      } else if action == "new_album" {
+        self.viewModel.pushNew = true
+      }
+    }
+  }
 }
 
 struct ContentView_Previews: PreviewProvider {
