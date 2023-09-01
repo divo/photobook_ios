@@ -185,13 +185,14 @@ struct NewAlbumView: View {
   }
   
   func createAlbum() {
-    self.pushShow = true
     switch isValid() {
     case .failure(let error):
       self.viewModel.alertMessage = error.localizedDescription
       self.showingAlert = true
+      return
     case.success(_):
       // TODO: Need to show a spinner, or update the next view with the album id after it comes back
+      self.pushShow = true
       self.client.create_album(csrf: self.viewModel.csrfToken!, title: self.viewModel.title, images: self.viewModel.images) { result in
         switch result {
         case .success(let album):
