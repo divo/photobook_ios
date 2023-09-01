@@ -10,10 +10,7 @@ import Network
 
 struct IndexView: View {
   @StateObject var viewModel: IndexViewModel = IndexViewModel()
-//  @StateObject var webViewModel: WebViewModel = WebViewModel()
   @StateObject var webViewModel: WebViewModel = WebViewModel()
-//  let showAlbumView: WebViewContainer = WebViewContainer(url: Constants.renameMe)
-  
 
   var body: some View {
     NavigationView {
@@ -34,9 +31,9 @@ struct IndexView: View {
             }.edgesIgnoringSafeArea(.bottom)
         }
        
-//        NavigationLink(destination: NewAlbumView(rootIsActive: self.$viewModel.pushNew), isActive: self.$viewModel.pushNew) { EmptyView() }.isDetailLink(false)
-//        NavigationLink(destination: self.showAlbumView, isActive: $viewModel.pushShow) { EmptyView() }
-//        NavigationLink(destination: WebViewContainer(url: viewModel.profileUrl, title: $viewModel.profileTitle), isActive: $viewModel.pushProfile) { EmptyView() }
+        NavigationLink(destination: NewAlbumView(rootIsActive: self.$viewModel.pushNew), isActive: self.$viewModel.pushNew) { EmptyView() }.isDetailLink(false)
+        NavigationLink(destination: WebViewContainer(url: $viewModel.showUrl, title: $viewModel.childTitle), isActive: $viewModel.pushShow) { EmptyView() }
+        NavigationLink(destination: WebViewContainer(url: $viewModel.profileUrl, title: $viewModel.profileTitle), isActive: $viewModel.pushProfile) { EmptyView() }
       }.navigationTitle("Mementos")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -57,9 +54,9 @@ struct IndexView: View {
         if let queryItems = queryItems,
            let titleParam = queryItems.first(where: { item in item.name == "name" }), // Why in gods name did I call the title "name"
            let title = titleParam.value {
-          self.viewModel.childTitle = title // TODO: Need to wire this through somehow
+          self.viewModel.childTitle = title
         }
-//        self.showAlbumView.loadURL(URL(string: Constants.baseURL + "/photo_albums/\(destination)")!)
+        self.viewModel.showUrl = URL(string: Constants.baseURL + "/photo_albums/\(destination)")!
         self.viewModel.pushShow = true
       } else if action == "new_album" {
         self.viewModel.pushNew = true

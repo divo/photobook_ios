@@ -68,5 +68,225 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DD81DC97-A945-4234-AA84-BDE1FBCF78D9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mementos/NewAlbumView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "createAlbum()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "DD81DC97-A945-4234-AA84-BDE1FBCF78D9 - fadbf3a950e20921"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Mementos.CreateAlbumResponse, Alamofire.AFError&gt;) -&gt; () in Mementos.NewAlbumView.createAlbum() -&gt; ()"
+                  moduleName = "Mementos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stevendiviney/code/photobook_ios/Mementos/NewAlbumView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "194"
+                  endingLineNumber = "194"
+                  offsetFromSymbolStart = "1464">
+               </Location>
+               <Location
+                  uuid = "DD81DC97-A945-4234-AA84-BDE1FBCF78D9 - fadbf3a950e20921"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Mementos.CreateAlbumResponse, Alamofire.AFError&gt;) -&gt; () in Mementos.NewAlbumView.createAlbum() -&gt; ()"
+                  moduleName = "Mementos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stevendiviney/code/photobook_ios/Mementos/NewAlbumView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "194"
+                  endingLineNumber = "194"
+                  offsetFromSymbolStart = "1172">
+               </Location>
+               <Location
+                  uuid = "DD81DC97-A945-4234-AA84-BDE1FBCF78D9 - fadbf3a950e20921"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Mementos.CreateAlbumResponse, Alamofire.AFError&gt;) -&gt; () in Mementos.NewAlbumView.createAlbum() -&gt; ()"
+                  moduleName = "Mementos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stevendiviney/code/photobook_ios/Mementos/NewAlbumView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "194"
+                  endingLineNumber = "194"
+                  offsetFromSymbolStart = "1736">
+               </Location>
+               <Location
+                  uuid = "DD81DC97-A945-4234-AA84-BDE1FBCF78D9 - fadbf3a950e20921"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Mementos.CreateAlbumResponse, Alamofire.AFError&gt;) -&gt; () in Mementos.NewAlbumView.createAlbum() -&gt; ()"
+                  moduleName = "Mementos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stevendiviney/code/photobook_ios/Mementos/NewAlbumView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "194"
+                  endingLineNumber = "194"
+                  offsetFromSymbolStart = "1828">
+               </Location>
+               <Location
+                  uuid = "DD81DC97-A945-4234-AA84-BDE1FBCF78D9 - fadbf3a950e20921"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Mementos.CreateAlbumResponse, Alamofire.AFError&gt;) -&gt; () in Mementos.NewAlbumView.createAlbum() -&gt; ()"
+                  moduleName = "Mementos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stevendiviney/code/photobook_ios/Mementos/NewAlbumView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "194"
+                  endingLineNumber = "194"
+                  offsetFromSymbolStart = "1396">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AE2898EA-A01F-4C1D-A304-3ED806D0E9AF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mementos/NewAlbumView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "243"
+            endingLineNumber = "243"
+            landmarkName = "upload(image:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8F9FF822-2DBB-4E02-95C2-2B4CD6CA3C49"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mementos/NewAlbumView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "photoList()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8F9FF822-2DBB-4E02-95C2-2B4CD6CA3C49 - ed6e1bf50eb1d00c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Mementos.NewAlbumView.photoList() -&gt; some"
+                  moduleName = "Mementos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stevendiviney/code/photobook_ios/Mementos/NewAlbumView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "108">
+               </Location>
+               <Location
+                  uuid = "8F9FF822-2DBB-4E02-95C2-2B4CD6CA3C49 - 5c60cf3b6707b402"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Mementos.ImageModel) -&gt; SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Spacer, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.clipped(antialiased: Swift.Bool) -&gt; some&gt;&gt;.0, Swift.Optional&lt;SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Text)&gt;&gt;&gt;)&gt;&gt;, SwiftUI.Spacer)&gt;&gt; in Mementos.NewAlbumView.photoList() -&gt; some"
+                  moduleName = "Mementos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stevendiviney/code/photobook_ios/Mementos/NewAlbumView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "152"
+                  endingLineNumber = "152"
+                  offsetFromSymbolStart = "84">
+               </Location>
+               <Location
+                  uuid = "8F9FF822-2DBB-4E02-95C2-2B4CD6CA3C49 - ed6e1bf50eb1d00c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Mementos.NewAlbumView.photoList() -&gt; some"
+                  moduleName = "Mementos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stevendiviney/code/photobook_ios/Mementos/NewAlbumView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "88">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D3C65FF5-2CD3-4B2F-87C5-953EA9DB367F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mementos/Client.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "direct_upload(csrf:imageModel:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7C3BED13-82BC-49DE-94FD-5CD02D3C5255"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mementos/NewAlbumViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "loadTransferable(from:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "92DE98A6-02D6-4C1A-A94A-1F26BFA5FADE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mementos/IndexView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "setActionHander()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
