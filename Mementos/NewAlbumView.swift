@@ -49,6 +49,11 @@ struct NewAlbumView: View {
         }.animation(.default, value: totalUploads != completedUploads)
       }
       
+      Text("Upload between \(minPhotos) and 200 photos")
+        .foregroundColor(Color(uiColor: .secondaryLabel))
+        .multilineTextAlignment(.center)
+        .font(.subheadline)
+      
       if viewModel.images.isEmpty {
         Spacer(minLength: 50)
         Button {
